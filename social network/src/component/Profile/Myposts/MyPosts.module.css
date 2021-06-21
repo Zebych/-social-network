@@ -1,0 +1,10 @@
+.profile {
+    background-color: chocolate;
+    padding: 10px;
+}
+
+.profile img {
+    border-radius: 15px;
+    width: 30px;
+    height: 30px;
+}
