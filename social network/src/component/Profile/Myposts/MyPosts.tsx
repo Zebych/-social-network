@@ -1,6 +1,7 @@
-import React, {LegacyRef, MouseEventHandler} from 'react';
+import React, {ChangeEvent} from 'react';
 import c from './MyPosts.module.css';
 import Post from "./Post/Post";
+
 
 
 type PostsDataType = {
@@ -11,6 +12,8 @@ type PostsDataType = {
 type PropsType = {
     PostsData: PostsDataType[]
     onClickAddPost: (postMessage: string) => void
+    newPostText:string
+    updateNewPostText:(newText:string)=>void
 }
 
 
@@ -23,6 +26,9 @@ const MyPosts: React.FC<PropsType> = (props) => {
             newPostElement.current.value=''
         }
     }
+    const updateNewPostText=(e:ChangeEvent<HTMLTextAreaElement>)=>{
+        props.updateNewPostText(e.currentTarget.value)
+    }
     return (
         <div>
             <div className={c.profile}>
@@ -32,7 +38,7 @@ const MyPosts: React.FC<PropsType> = (props) => {
                     ava
                 </div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea ref={newPostElement} onChange={updateNewPostText} value={props.newPostText} />
                 </div>
             </div>
             {PostsElement}
