@@ -2,6 +2,7 @@ import React from 'react';
 import c from './Profile.module.css';
 import MyPosts from "./Myposts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {Types} from "../../Redax/state";
 
 
 
@@ -16,8 +17,7 @@ type PostsDataType={
 }
 type PropsType={
     PostsData:profilePageType
-    onClickAddPost:(postMessage:string)=>void
-    updateNewPostText:(newText:string)=>void
+    dispatch:(action:Types)=>void
 }
 
 
@@ -27,8 +27,7 @@ const Profile:React.FC<PropsType> = (props) => {
             <ProfileInfo/>
             <MyPosts PostsData={props.PostsData.PostsData}
                      newPostText={props.PostsData.messageNewPostText}
-                     onClickAddPost={props.onClickAddPost}
-                     updateNewPostText={props.updateNewPostText}
+                     dispatch={props.dispatch}
             />
 
         </div>);

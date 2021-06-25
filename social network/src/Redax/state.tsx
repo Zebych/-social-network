@@ -32,7 +32,18 @@ export type StoreType={
     subscribe:(observer:()=>void)=>void
     renderTree:()=>void
     getState:()=>RootStateType
+    dispatch:(action:AddPostType|UpdateNewPostTextType)=>void
 }
+type AddPostType= {
+    type: 'ADD-POST'
+    postMessage:string
+}
+type UpdateNewPostTextType= {
+    type:'UPDATE-NEW-POST-TEXT'
+    newText:string
+}
+export type Types=AddPostType|UpdateNewPostTextType
+
 const store:StoreType={
     _state : {
         profilePage: {
@@ -78,7 +89,23 @@ const store:StoreType={
     },
     getState(){
         return this._state
-    }
+    },
+
+    dispatch(action){
+        if(action.type==='UPDATE-NEW-POST-TEXT'){
+            this._state.profilePage.messageNewPostText=action.newText
+            this.renderTree()
+        }else if(action.type==='ADD-POST'){
+            const newPost: PostsDataType = {
+                id: 5,
+                message: action.postMessage,
+                likesCount: 0
+            }
+            this._state.profilePage.PostsData.push(newPost)
+            this.renderTree()
+        }
+        },
+
 }
 
 export default store;

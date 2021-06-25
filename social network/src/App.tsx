@@ -5,15 +5,16 @@ import Header from "./component/Header/Header";
 import Navbar from "./component/Navbar/Navbar";
 import Profile from "./component/Profile/Profile";
 import Dialogs from "./component/Dialogs/Dialogs";
-import {StoreType} from "./Redax/state";
+import {StoreType, Types} from "./Redax/state";
 
 
 type PropsType = {
     store: StoreType
+    dispatch: (action: Types) => void
 }
 
 const App: React.FC<PropsType> = (props) => {
-    const state=props.store.getState()
+    const state = props.store.getState()
     return (
 
         <div className={'app-wrapper'}>
@@ -23,9 +24,9 @@ const App: React.FC<PropsType> = (props) => {
             <div className={'app-wrapper-content'}>
                 <Route path={'/dialogs'} render={() => <Dialogs DialogData={state.dialogsPage.DialogData}
                                                                 MessageData={state.dialogsPage.MessageData}/>}/>
-                <Route path={'/profile'} render={() => <Profile onClickAddPost={props.store.onClickAddPost.bind(props.store)}
-                                                                PostsData={state.profilePage}
-                                                                updateNewPostText={props.store.updateNewPostText.bind(props.store)}
+                <Route path={'/profile'} render={() => <Profile PostsData={state.profilePage}
+                                                                dispatch={props.dispatch}
+
                 />}/>
             </div>
         </div>
