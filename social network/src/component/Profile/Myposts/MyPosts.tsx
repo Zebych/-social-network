@@ -1,8 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import c from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {Types} from "../../../Redax/state";
-
+import {AddPostAC, Types, UpdateNewPostTextAC} from "../../../Redax/state";
 
 
 type PostsDataType = {
@@ -23,13 +22,13 @@ const MyPosts: React.FC<PropsType> = (props) => {
     let addPost = () => {
         if(newPostElement.current){
             let postMessage=newPostElement.current.value
-            props.dispatch({type:'ADD-POST',postMessage:postMessage})
+            props.dispatch(AddPostAC(postMessage))
             newPostElement.current.value=''
         }
     }
     const updateNewPostText=(e:ChangeEvent<HTMLTextAreaElement>)=>{
         let newText=e.currentTarget.value
-        props.dispatch({type: 'UPDATE-NEW-POST-TEXT',newText:newText})
+        props.dispatch(UpdateNewPostTextAC(newText))
     }
     return (
         <div>

@@ -1,3 +1,6 @@
+const UPDATE_NEW_POST_TEXT='UPDATE-NEW-POST-TEXT'
+const ADD_POST='ADD-POST'
+
 type PostsDataType = {
     id: number
     message: string
@@ -32,17 +35,24 @@ export type StoreType={
     subscribe:(observer:()=>void)=>void
     renderTree:()=>void
     getState:()=>RootStateType
-    dispatch:(action:AddPostType|UpdateNewPostTextType)=>void
+    dispatch:(action:Types)=>void
 }
-type AddPostType= {
-    type: 'ADD-POST'
-    postMessage:string
+
+export type Types=ReturnType<typeof AddPostAC>|ReturnType<typeof UpdateNewPostTextAC>
+
+
+export const AddPostAC=(postMessage:string)=>{
+    return{
+        type:ADD_POST,
+        postMessage:postMessage
+    }as const
 }
-type UpdateNewPostTextType= {
-    type:'UPDATE-NEW-POST-TEXT'
-    newText:string
+export const UpdateNewPostTextAC=(newText:string)=>{
+    return{
+        type: UPDATE_NEW_POST_TEXT,
+        newText:newText
+    }as const
 }
-export type Types=AddPostType|UpdateNewPostTextType
 
 const store:StoreType={
     _state : {
