@@ -9,7 +9,7 @@ import App from "./App";
 const renderTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App store={store} dispatch={store.dispatch.bind(store)} />
+            <App store={store} dispatch={store.dispatch.bind(store)}  />
         </BrowserRouter>, document.getElementById('root')
     );
 }
