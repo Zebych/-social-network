@@ -2,7 +2,8 @@ import React, {ChangeEvent} from 'react';
 import c from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {Message} from "./Message/Message";
-import {AddMessageAC, StoreType, UpdateNewMessageTextAC} from "../../Redax/state";
+import {AddMessageAC, UpdateNewMessageTextAC} from "../../Redax/dialogsPage-reducer";
+import {StoreType} from "../../Redax/state";
 
 
 type PropsDialogType = {

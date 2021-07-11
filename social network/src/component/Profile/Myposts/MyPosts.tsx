@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from 'react';
 import c from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {AddPostAC, Types, UpdateNewPostTextAC} from "../../../Redax/state";
+import {AddPostAC, UpdateNewPostTextAC} from "../../../Redax/profile-reducer";
+import {Types} from "../../../Redax/state";
 
 
 type PostsDataType = {

@@ -1,11 +1,7 @@
-import dialogsPageReducer from "./DialogsPage-reducer";
-import profileReducer from "./profile-reducer";
+import dialogsPageReducer, {AddMessageAC, UpdateNewMessageTextAC} from "./dialogsPage-reducer";
+import profileReducer, {AddPostAC, UpdateNewPostTextAC} from "./profile-reducer";
 
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-const ADD_POST = 'ADD-POST'
 
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
-const ADD_MESSAGE = 'ADD-MESSAGE'
 
 export type PostsDataType = {
     id: number
@@ -92,29 +88,6 @@ const store: StoreType = {
     }
 
 }
-export const AddMessageAC = () => {
-    return {
-        type: ADD_MESSAGE,
 
-    } as const
-}
-export const UpdateNewMessageTextAC = (body: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        newMassage: body
-    } as const
-}
-export const AddPostAC = (postMessage: string) => {
-    return {
-        type: ADD_POST,
-        postMessage: postMessage
-    } as const
-}
-export const UpdateNewPostTextAC = (newText: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: newText
-    } as const
-}
 
 export default store;
