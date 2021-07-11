@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import c from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {Message} from "./Message/Message";
-import {AddMessageAC,  StoreType,  UpdateNewMessageTextAC} from "../../Redax/state";
+import {AddMessageAC, StoreType, UpdateNewMessageTextAC} from "../../Redax/state";
 
 
 type PropsDialogType = {
@@ -19,8 +19,8 @@ const Dialogs: React.FC<PropsDialogType> = (props) => {
 
 
     const addMessage = () => {
-            props.store.dispatch(AddMessageAC())
-        }
+        props.store.dispatch(AddMessageAC())
+    }
 
     const onChangeNewMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const body = e.target.value
@@ -35,8 +35,11 @@ const Dialogs: React.FC<PropsDialogType> = (props) => {
                 {MessageElement}
             </div>
             <div>
-                <textarea value={newMassageBody} onChange={onChangeNewMessage}
-                          placeholder={'Enter your message'}></textarea>
+                <textarea
+                    value={newMassageBody}
+                    onChange={onChangeNewMessage}
+                    placeholder={'Enter your message'}>
+                </textarea>
             </div>
             <div>
                 <button onClick={addMessage}>send message</button>

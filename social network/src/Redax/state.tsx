@@ -1,10 +1,13 @@
+import dialogsPageReducer from "./DialogsPage-reducer";
+import profileReducer from "./profile-reducer";
+
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const ADD_POST = 'ADD-POST'
 
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 const ADD_MESSAGE = 'ADD-MESSAGE'
 
-type PostsDataType = {
+export type PostsDataType = {
     id: number
     message: string
     likesCount: number
@@ -14,11 +17,11 @@ type DialogDataType = {
     id: number
     name: string
 }
-type MessageType = {
+export type MessageType = {
     id: number
     message: string
 }
-type profilePageType = {
+export type profilePageType = {
     PostsData: PostsDataType[]
     messageNewPostText: string
 }
@@ -34,8 +37,6 @@ export type RootStateType = {
 
 export type StoreType = {
     _state: RootStateType
-    /* onClickAddPost: (postMessage: string) => void
-     updateNewPostText: (newText: string) => void*/
     subscribe: (observer: () => void) => void
     renderTree: () => void
     getState: () => RootStateType
@@ -71,19 +72,7 @@ const store: StoreType = {
             newMessage: ""
         }
     },
-    /* onClickAddPost(postMessage: string) {
-         const newPost: PostsDataType = {
-             id: 5,
-             message: postMessage,
-             likesCount: 0
-         }
-         this._state.profilePage.PostsData.push(newPost)
-         this.renderTree()
-     },
-     updateNewPostText(newText: string) {
-         this._state.profilePage.messageNewPostText = newText
-         this.renderTree()
-     },*/
+
 
     subscribe(observer) {
         this.renderTree = observer
@@ -96,31 +85,11 @@ const store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.messageNewPostText = action.newText
-            this.renderTree()
-        } else if (action.type === 'ADD-POST') {
-            const newPost: PostsDataType = {
-                id: 5,
-                message: action.postMessage,
-                likesCount: 0
-            }
-            this._state.profilePage.PostsData.push(newPost)
-            this.renderTree()
-        } else if (action.type === 'ADD-MESSAGE') {
-            let body = this._state.dialogsPage.newMessage
-            this._state.dialogsPage.newMessage = ''
-            const newMassageBody: MessageType = {
-                id: 6,
-                message: body
-            }
-            this._state.dialogsPage.MessageData.push(newMassageBody)
-            this.renderTree()
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            this._state.dialogsPage.newMessage = action.newMassage
-            this.renderTree()
-        }
-    },
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsPageReducer(this._state.dialogsPage, action)
+
+        this.renderTree()
+    }
 
 }
 export const AddMessageAC = () => {
