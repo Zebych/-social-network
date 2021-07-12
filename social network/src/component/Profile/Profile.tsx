@@ -6,7 +6,7 @@ import MyPostsContainer from "./Myposts/MyPostsContainer";
 
 
 type PropsType={
-    store:StoreType
+   /* store:StoreType*/
 }
 
 
@@ -14,9 +14,9 @@ const Profile:React.FC<PropsType> = (props) => {
     return (
         <div className={c.profile}>
             <ProfileInfo/>
-            <MyPostsContainer store={props.store}
+            <MyPostsContainer
             />
-
+            {/*<MyPostsContainer store={props.store}  />*/}
         </div>);
 }
 
