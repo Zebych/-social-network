@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import store from "./Redax/state";
+import store from "./Redax/redux-store";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
@@ -9,12 +9,14 @@ import App from "./App";
 const renderTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App store={store} dispatch={store.dispatch.bind(store)}  />
+            <App store={store}  />
         </BrowserRouter>, document.getElementById('root')
     );
 }
 
-store.subscribe(renderTree)
+store.subscribe(()=> {
+    renderTree()
+})
 renderTree()
 
 // If you want to start measuring performance in your app, pass a function

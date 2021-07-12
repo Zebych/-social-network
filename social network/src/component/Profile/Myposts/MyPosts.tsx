@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import c from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {AddPostAC, UpdateNewPostTextAC} from "../../../Redax/profile-reducer";
-import {Types} from "../../../Redax/state";
+import {Types} from "../../../Redax/store";
 
 
 type PostsDataType = {
@@ -13,28 +13,29 @@ type PostsDataType = {
 type PropsType = {
     PostsData: PostsDataType[]
     newPostText:string
-    dispatch:(action:Types)=>void
+    updateNewPostText:(newText:string)=>void
+    addPost:(postMessage:string)=>void
 }
 
 
 const MyPosts: React.FC<PropsType> = (props) => {
     const PostsElement = props.PostsData.map(p => <Post message={p.message} likeCount={p.likesCount}/>)
     let newPostElement = React.createRef<HTMLTextAreaElement>()
-    let addPost = () => {
+    let onAddPost = () => {
         if(newPostElement.current){
             let postMessage=newPostElement.current.value
-            props.dispatch(AddPostAC(postMessage))
+            props.addPost(postMessage)
             newPostElement.current.value=''
         }
     }
     const updateNewPostText=(e:ChangeEvent<HTMLTextAreaElement>)=>{
         let newText=e.currentTarget.value
-        props.dispatch(UpdateNewPostTextAC(newText))
+        props.updateNewPostText(newText)
     }
     return (
         <div>
             <div className={c.profile}>
-                <button onClick={addPost}>Create Post</button>
+                <button onClick={onAddPost}>Create Post</button>
                 <div>
                     <img src="https://meragor.com/files/styles//ava_800_800_wm/_big-and-goofy-smile_0.jpg" alt=""/>
                     ava

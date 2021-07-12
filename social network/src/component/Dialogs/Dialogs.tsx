@@ -2,30 +2,30 @@ import React, {ChangeEvent} from 'react';
 import c from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {Message} from "./Message/Message";
-import {AddMessageAC, UpdateNewMessageTextAC} from "../../Redax/dialogsPage-reducer";
-import {StoreType} from "../../Redax/state";
+import {dialogsPageType} from "../../Redax/store";
 
 
 type PropsDialogType = {
-    store: StoreType
+    DialogsPage: dialogsPageType
+    onChangeNewMessage: (body: string) => void
+    onAddMessage: () => void
 }
 
 
 const Dialogs: React.FC<PropsDialogType> = (props) => {
-    let state = props.store.getState().dialogsPage
-
+    let state = props.DialogsPage
     const DialogsElement = state.DialogData.map(d => <DialogItem id={d.id} name={d.name}/>)
     const MessageElement = state.MessageData.map(m => <Message message={m.message}/>)
     let newMassageBody = state.newMessage
 
 
     const addMessage = () => {
-        props.store.dispatch(AddMessageAC())
+        props.onAddMessage()
     }
 
-    const onChangeNewMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const ChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const body = e.target.value
-        props.store.dispatch(UpdateNewMessageTextAC(body))
+        props.onChangeNewMessage(body)
     }
     return (
         <div className={c.dialogs}>
@@ -38,7 +38,7 @@ const Dialogs: React.FC<PropsDialogType> = (props) => {
             <div>
                 <textarea
                     value={newMassageBody}
-                    onChange={onChangeNewMessage}
+                    onChange={ChangeMessage}
                     placeholder={'Enter your message'}>
                 </textarea>
             </div>

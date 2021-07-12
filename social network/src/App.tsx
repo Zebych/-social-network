@@ -4,17 +4,15 @@ import './App.css';
 import Header from "./component/Header/Header";
 import Navbar from "./component/Navbar/Navbar";
 import Profile from "./component/Profile/Profile";
-import Dialogs from "./component/Dialogs/Dialogs";
-import {StoreType, Types} from "./Redax/state";
+import {StoreType} from "./Redax/store";
+import DialogsContainer from "./component/Dialogs/DialogsContainer";
 
 
 type PropsType = {
     store: StoreType
-    dispatch: (action: Types) => void
 }
 
 const App: React.FC<PropsType> = (props) => {
-    const state = props.store.getState()
     return (
 
         <div className={'app-wrapper'}>
@@ -22,10 +20,9 @@ const App: React.FC<PropsType> = (props) => {
             <Navbar/>
 
             <div className={'app-wrapper-content'}>
-                <Route path={'/dialogs'} render={() => <Dialogs store={props.store}
+                <Route path={'/dialogs'} render={() => <DialogsContainer store={props.store}
                 />}/>
-                <Route path={'/profile'} render={() => <Profile PostsData={state.profilePage}
-                                                                dispatch={props.dispatch}
+                <Route path={'/profile'} render={() => <Profile store={props.store}
 
                 />}/>
             </div>
