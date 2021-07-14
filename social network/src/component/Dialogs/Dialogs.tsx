@@ -6,26 +6,26 @@ import {dialogsPageType} from "../../Redax/store";
 
 
 type PropsDialogType = {
-    DialogsPage: dialogsPageType
-    onChangeNewMessage: (body: string) => void
-    onAddMessage: () => void
+    dialogsPage: dialogsPageType
+    updateNewMessageBody: (body: string) => void
+    sendMessage: () => void
 }
 
 
 const Dialogs: React.FC<PropsDialogType> = (props) => {
-    let state = props.DialogsPage
+    let state = props.dialogsPage
     const DialogsElement = state.DialogData.map(d => <DialogItem id={d.id} name={d.name}/>)
     const MessageElement = state.MessageData.map(m => <Message message={m.message}/>)
     let newMassageBody = state.newMessage
 
 
     const addMessage = () => {
-        props.onAddMessage()
+        props.sendMessage()
     }
 
     const ChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const body = e.target.value
-        props.onChangeNewMessage(body)
+        props.updateNewMessageBody(body)
     }
     return (
         <div className={c.dialogs}>

@@ -1,6 +1,6 @@
 import dialogsPageReducer, {AddMessageAC, UpdateNewMessageTextAC} from "./dialogsPage-reducer";
 import profileReducer, {AddPostAC, UpdateNewPostTextAC} from "./profile-reducer";
-
+import React from "react";
 
 export type PostsDataType = {
     id: number

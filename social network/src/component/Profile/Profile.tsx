@@ -1,22 +1,13 @@
 import React from 'react';
 import c from './Profile.module.css';
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import { StoreType} from "../../Redax/store";
 import MyPostsContainer from "./Myposts/MyPostsContainer";
 
-
-type PropsType={
-   /* store:StoreType*/
-}
-
-
-const Profile:React.FC<PropsType> = (props) => {
+const Profile = () => {
     return (
         <div className={c.profile}>
             <ProfileInfo/>
-            <MyPostsContainer
-            />
-            {/*<MyPostsContainer store={props.store}  />*/}
+            <MyPostsContainer/>
         </div>);
 }
 

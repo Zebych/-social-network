@@ -1,50 +1,27 @@
 import React from 'react';
 import {AddPostAC, UpdateNewPostTextAC} from "../../../Redax/profile-reducer";
-import {StoreType} from "../../../Redax/store";
 import MyPosts from "./MyPosts";
-import StoreContext from "../../../StoreContext";
-
-type MyPostsContainerPropsType = {
-/*    store: StoreType*/
-}
+import {connect} from "react-redux";
+import { profilePageType,Types} from "../../../Redax/store";
 
 
-const MyPostsContainer: React.FC<MyPostsContainerPropsType> = (props) => {
-  /*  let state = props.store.getState()*/
-
-    /*let addPost = (postMessage: string) => {
-        props.store.dispatch(AddPostAC(postMessage))
+const mapStateToProps = (state: profilePageType) => {
+    return {
+        PostsData: state.PostsData,
+        newPostText: state.messageNewPostText
     }
-    const onPostChange = (newText: string) => {
-        props.store.dispatch(UpdateNewPostTextAC(newText))
-    }*/
-
-    return (
-        <StoreContext.Consumer>
-            {
-            (store)=>{
-                let state = store.getState()
-
-                let addPost = (postMessage: string) => {
-                    store.dispatch(AddPostAC(postMessage))
-                }
-                const onPostChange = (newText: string) => {
-                   store.dispatch(UpdateNewPostTextAC(newText))
-                }
-
-                return  <MyPosts
-                PostsData={state.profilePage.PostsData}
-                newPostText={state.profilePage.messageNewPostText}
-                addPost={addPost}
-                updateNewPostText={onPostChange}/>
-        }}
-        </StoreContext.Consumer>
-    )
 }
+const mapDispatchToProps = (dispatch: (action: Types) => void) => {
+    return {
+        updateNewPostText: (newText: string) => {
+            dispatch(UpdateNewPostTextAC(newText))
+        },
+        addPost: (postMessage: string) => {
+            dispatch(AddPostAC(postMessage))
+        }
+    }
+}
+
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 export default MyPostsContainer;
-/*
-<MyPosts
-    PostsData={state.profilePage.PostsData}
-    newPostText={state.profilePage.messageNewPostText}
-    addPost={addPost}
-    updateNewPostText={onPostChange}/>*/
+

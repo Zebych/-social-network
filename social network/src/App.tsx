@@ -4,15 +4,9 @@ import './App.css';
 import Header from "./component/Header/Header";
 import Navbar from "./component/Navbar/Navbar";
 import Profile from "./component/Profile/Profile";
-import {StoreType} from "./Redax/store";
 import DialogsContainer from "./component/Dialogs/DialogsContainer";
 
-
-type PropsType = {
-    // store: StoreType
-}
-
-const App: React.FC<PropsType> = (props) => {
+const App = () => {
     return (
 
         <div className={'app-wrapper'}>
@@ -20,13 +14,8 @@ const App: React.FC<PropsType> = (props) => {
             <Navbar/>
 
             <div className={'app-wrapper-content'}>
-                <Route path={'/dialogs'} render={() => <DialogsContainer
-                /*<Route path={'/dialogs'} render={() => <DialogsContainer store={props.store}*/
-                />}/>
-                <Route path={'/profile'} render={() => <Profile
-                /*<Route path={'/profile'} render={() => <Profile store={props.store}*/
-
-                />}/>
+                <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
+                <Route path={'/profile'} render={() => <Profile/>}/>
             </div>
         </div>
 

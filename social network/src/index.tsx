@@ -5,16 +5,14 @@ import store from "./Redax/redux-store";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
-import StoreContext from "./StoreContext";
-import {StoreType} from "./Redax/store";
-
+import {Provider} from "react-redux";
 
 const renderTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <StoreContext.Provider value={store}>
-            <App  />
-            </StoreContext.Provider>
+            <Provider store={store}>
+            <App />
+            </Provider>
         </BrowserRouter>, document.getElementById('root')
     );
 }
