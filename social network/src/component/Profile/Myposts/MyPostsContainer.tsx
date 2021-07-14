@@ -2,13 +2,13 @@ import React from 'react';
 import {AddPostAC, UpdateNewPostTextAC} from "../../../Redax/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
-import { profilePageType,Types} from "../../../Redax/store";
+import { RootStateType, Types} from "../../../Redax/store";
 
 
-const mapStateToProps = (state: profilePageType) => {
+const mapStateToProps = (state: RootStateType) => {
     return {
-        PostsData: state.PostsData,
-        newPostText: state.messageNewPostText
+        PostsData: state.profilePage.PostsData,
+        newPostText: state.profilePage.messageNewPostText
     }
 }
 const mapDispatchToProps = (dispatch: (action: Types) => void) => {

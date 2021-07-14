@@ -20,19 +20,27 @@ let initialState = {
 }
 
 const dialogsPageReducer: React.Reducer<dialogsPageType, Types> = (state = initialState, action): dialogsPageType => {
+    let stateCopy
     switch (action.type) {
         case ADD_MESSAGE:
             let body = state.newMessage
-            state.newMessage = ''
-            const newMassageBody: MessageType = {
-                id: 6,
-                message: body
+            stateCopy = {
+                ...state,
+                newMessage : '',
+                MessageData: [...state.MessageData,{
+                    id: 6,
+                    message: body
+                }]
+
             }
-            state.MessageData.push(newMassageBody)
-            return state
+            return stateCopy
+
         case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessage = action.newMassage
-            return state
+            stateCopy = {
+                ...state,
+                newMessage: action.newMassage
+            }
+            return stateCopy
         default:
             return state
     }

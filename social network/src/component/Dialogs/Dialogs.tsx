@@ -14,8 +14,8 @@ type PropsDialogType = {
 
 const Dialogs: React.FC<PropsDialogType> = (props) => {
     let state = props.dialogsPage
-    const DialogsElement = state.DialogData.map(d => <DialogItem id={d.id} name={d.name}/>)
-    const MessageElement = state.MessageData.map(m => <Message message={m.message}/>)
+    const DialogsElement = state.DialogData.map(d => <DialogItem key={d.id} id={d.id} name={d.name}/>)
+    const MessageElement = state.MessageData.map(m => <Message key={m.id}  message={m.message}/>)
     let newMassageBody = state.newMessage
 
 

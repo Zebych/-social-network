@@ -1,12 +1,12 @@
 import React from 'react';
 import {AddMessageAC, UpdateNewMessageTextAC} from "../../Redax/dialogsPage-reducer";
-import {dialogsPageType,Types} from "../../Redax/store";
+import { RootStateType, Types} from "../../Redax/store";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 
-const mapStateToProps=(state:dialogsPageType)=>{
+const mapStateToProps=(state:RootStateType)=>{
     return{
-        dialogsPage: state
+        dialogsPage: state.dialogsPage
     }
 }
 const mapDispatchToProps=(dispatch:(action: Types) => void)=>{
