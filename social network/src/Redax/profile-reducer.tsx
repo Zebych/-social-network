@@ -22,17 +22,17 @@ const profileReducer: React.Reducer<profilePageType, Types> = (state = initialSt
                 message: action.postMessage,
                 likesCount: 0
             }
-            let stateCopy={...state}
-            stateCopy.PostsData=[...state.PostsData]
-            stateCopy.PostsData.push(newPost)
-            stateCopy.messageNewPostText = ''
-            return stateCopy
-        case UPDATE_NEW_POST_TEXT:{
-            let stateCopy={...state}
-            stateCopy.messageNewPostText = action.newText
-            return stateCopy
-        }
+            return {
+                ...state,
+                PostsData: [...state.PostsData, newPost],
+                messageNewPostText: ''
+            }
 
+        case UPDATE_NEW_POST_TEXT:
+            return {
+                ...state,
+                messageNewPostText: action.newText
+            }
         default:
             return state
 
