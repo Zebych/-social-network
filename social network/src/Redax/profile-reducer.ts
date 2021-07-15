@@ -18,7 +18,7 @@ const profileReducer: React.Reducer<profilePageType, Types> = (state = initialSt
     switch (action.type) {
         case ADD_POST:
             const newPost: PostsDataType = {
-                id: 5,
+                id: 4,
                 message: action.postMessage,
                 likesCount: 0
             }

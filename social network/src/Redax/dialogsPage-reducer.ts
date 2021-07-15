@@ -1,4 +1,4 @@
-import {dialogsPageType, MessageType, Types} from "./store";
+import {dialogsPageType, Types} from "./store";
 import React from "react";
 
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
@@ -14,7 +14,7 @@ let initialState = {
     MessageData: [
         {id: 1, message: 'Hi'},
         {id: 2, message: 'Yo'},
-        {id: 2, message: 'YO YOYo'}
+        {id: 3, message: 'YO YOYo'}
     ],
     newMessage: ""
 }
@@ -46,7 +46,6 @@ const dialogsPageReducer: React.Reducer<dialogsPageType, Types> = (state = initi
 export const AddMessageAC = () => {
     return {
         type: ADD_MESSAGE,
-
     } as const
 }
 export const UpdateNewMessageTextAC = (body: string) => {
