@@ -10,13 +10,19 @@ type LocationType = {
     city: string
     country: string
 }
+type PhotosType={
+    small:string
+    large:string
+}
 export type UserType = {
     id: number
-    photoUrl: string
-    fullName: string
+    photos: PhotosType
+    name: string
     status: string
     followed: boolean
     location: LocationType
+    uniqueUrlName: null
+
 }
 export type InitialStateType = {
     users: UserType[]
@@ -24,26 +30,38 @@ export type InitialStateType = {
 
 let initialState: InitialStateType = {
     users: [
-        {
+       /* {
             id: 1,
-            photoUrl: 'https://www.intermedia.ru/img/news_x350/358935.jpg',
-            fullName: 'Dead Blonde',
+            photos: {small:'https://www.intermedia.ru/img/news_x350/358935.jpg',large:'https://www.intermedia.ru/img/news_x350/358935.jpg'} ,
+            name: 'Dead Blonde',
             status: 'I am a boss too',
             followed: true,
-            location: {city: 'Vladimir', country: 'Rassia'}
+            location: {city: 'Vladimir', country: 'Rassia'},
+            uniqueUrlName:null
         },
         {
-            id: 2, photoUrl: 'https://www.intermedia.ru/img/news_x350/358935.jpg',
-            fullName: 'Alex', status: 'I am a boss', followed: true, location: {city: 'Vladimir', country: 'Rassia'}
+            id: 2,
+            photos: {small:'https://www.intermedia.ru/img/news_x350/358935.jpg',large:'https://www.intermedia.ru/img/news_x350/358935.jpg'} ,
+            name: 'Alex',
+            status: 'I am a boss',
+            followed: true,
+            location: {city: 'Vladimir', country: 'Rassia'},
+            uniqueUrlName:null
         },
         {
-            id: 3, photoUrl: 'https://www.intermedia.ru/img/news_x350/358935.jpg',
-            fullName: 'Alex', status: 'I am a boss', followed: true, location: {city: 'Vladimir', country: 'Rassia'}
-        },
+            id: 3,
+            photos: {small:'https://www.intermedia.ru/img/news_x350/358935.jpg',
+                large:'https://www.intermedia.ru/img/news_x350/358935.jpg'} ,
+            name: 'Alex',
+            status: 'I am a boss',
+            followed: true,
+            location: {city: 'Vladimir', country: 'Rassia'},
+            uniqueUrlName:null
+        },*/
     ]
 }
 
-const usersReducer: React.Reducer<InitialStateType, UsersTypeAC> = (state = initialState, action): InitialStateType => {
+const usersReducer: React.Reducer<InitialStateType, UsersTypeAC> = (state=initialState, action): InitialStateType => {
 
     switch (action.type) {
         case FOLLOW:
