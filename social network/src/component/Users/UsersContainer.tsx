@@ -2,22 +2,39 @@ import React from 'react';
 import {Dispatch} from 'redux';
 import Users from "./Users";
 import {connect} from "react-redux";
-import {followAC, InitialStateType, setUsersAC, unfollowAC, UserType} from "../../Redax/users-reducer";
+import {
+    followAC,
+    InitialStateType,
+    setCurrentPageAC, setTotalUsersCountAC,
+    setUsersAC,
+    unfollowAC,
+    UserType
+} from "../../Redax/users-reducer";
 import {AppStateType} from "../../Redax/redux-store";
 
 export type MapStatePropsType = {
-    usersPage: InitialStateType
+    usersPage: InitialStateType,
+    pageSize:number,
+    totalUsersCount:number,
+    currentPage:number,
 }
 export type MapDispatchToPropsType = {
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-    setUsers: (users: UserType[]) => void
+    follow: (userId: number) => void,
+    unfollow: (userId: number) => void,
+    setUsers: (users: UserType[]) => void,
+    setCurrentPage:(currentPage:number)=>void,
+    setTotalUsersCount:(totalCount:number)=>void,
 }
 export type UsersPropsType = MapStatePropsType & MapDispatchToPropsType
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
+    debugger
     return {
-        usersPage: state.usersPage
+        usersPage: state.usersPage,
+        pageSize: state.usersPage,
+        totalUsersCount: state.usersPage,
+        currentPage: state.usersPage,
+
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
@@ -30,7 +47,13 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         },
         setUsers: (users: UserType[]) => {
             dispatch(setUsersAC(users))
-        }
+        },
+        setCurrentPage:(currentPage:number)=>{
+            dispatch(setCurrentPageAC(currentPage))
+        },
+        setTotalUsersCount:(totalCount:number)=>{
+            dispatch(setTotalUsersCountAC(totalCount))
+        },
     }
 }
 

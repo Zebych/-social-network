@@ -25,9 +25,30 @@ export type dialogsPageType = {
     DialogData: DialogDataType[]
     newMessage: string
 }
+type usersPageType={
+    users:Array<ArrayUsersType>
+}
+type LocationType = {
+    city: string,
+    country: string,
+}
+type PhotosType={
+    small:string,
+    large:string,
+}
+type ArrayUsersType={
+    id: number,
+    photos: PhotosType,
+    name: string,
+    status: string,
+    followed: boolean,
+    location: LocationType,
+    uniqueUrlName: null,
+}
 export type RootStateType = {
     profilePage: profilePageType
     dialogsPage: dialogsPageType
+    usersPage:usersPageType
 }
 
 export type StoreType = {
@@ -65,7 +86,39 @@ const store: StoreType = {
                 {id: 2, message: 'YO YOYo'}
             ],
             newMessage: ""
-        }
+        },
+        usersPage:{
+            users:[
+                 {
+                       id: 1,
+                       photos: {small:'https://www.intermedia.ru/img/news_x350/358935.jpg',large:'https://www.intermedia.ru/img/news_x350/358935.jpg'} ,
+                       name: 'Dead Blonde',
+                       status: 'I am a boss too',
+                       followed: true,
+                       location: {city: 'Vladimir', country: 'Rassia'},
+                       uniqueUrlName:null
+                   },
+                   {
+                       id: 2,
+                       photos: {small:'https://www.intermedia.ru/img/news_x350/358935.jpg',large:'https://www.intermedia.ru/img/news_x350/358935.jpg'} ,
+                       name: 'Alex',
+                       status: 'I am a boss',
+                       followed: true,
+                       location: {city: 'Vladimir', country: 'Rassia'},
+                       uniqueUrlName:null
+                   },
+                   {
+                       id: 3,
+                       photos: {small:'https://www.intermedia.ru/img/news_x350/358935.jpg',
+                           large:'https://www.intermedia.ru/img/news_x350/358935.jpg'} ,
+                       name: 'Alex',
+                       status: 'I am a boss',
+                       followed: true,
+                       location: {city: 'Vladimir', country: 'Rassia'},
+                       uniqueUrlName:null
+                   },
+            ],
+        },
     },
 
 
