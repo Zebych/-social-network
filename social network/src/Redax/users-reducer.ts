@@ -4,7 +4,8 @@ const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
-const SET_TOTAL_COUNT_PAGE='SET_TOTAL_COUNT_PAGE'
+const SET_TOTAL_COUNT_PAGE = 'SET_TOTAL_COUNT_PAGE'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 export type UsersTypeAC =
     ReturnType<typeof followAC>
@@ -12,6 +13,7 @@ export type UsersTypeAC =
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalUsersCountAC>
+    | ReturnType<typeof toggleIsFetchingAC>
 
 type LocationType = {
     city: string,
@@ -36,6 +38,7 @@ export type InitialStateType = {
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
+    isFetching: boolean,
 }
 
 let initialState: InitialStateType = {
@@ -43,6 +46,7 @@ let initialState: InitialStateType = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
+    isFetching: false,
 }
 
 const usersReducer: React.Reducer<InitialStateType, UsersTypeAC> = (state = initialState, action)
@@ -86,9 +90,13 @@ const usersReducer: React.Reducer<InitialStateType, UsersTypeAC> = (state = init
             return {
                 ...state, currentPage: action.currentPage
             }
-            case SET_TOTAL_COUNT_PAGE:
+        case SET_TOTAL_COUNT_PAGE:
             return {
                 ...state, totalUsersCount: action.totalCount
+            }
+        case TOGGLE_IS_FETCHING:
+            return {
+                ...state, isFetching: action.isFetching
             }
         default:
             return state
@@ -116,9 +124,14 @@ export const setCurrentPageAC = (currentPage: number) => {
         type: SET_CURRENT_PAGE, currentPage
     } as const
 }
-export const setTotalUsersCountAC = (totalCount:number) => {
+export const setTotalUsersCountAC = (totalCount: number) => {
     return {
         type: SET_TOTAL_COUNT_PAGE, totalCount
+    } as const
+}
+export const toggleIsFetchingAC = (isFetching: boolean) => {
+    return {
+        type: TOGGLE_IS_FETCHING, isFetching
     } as const
 }
 
