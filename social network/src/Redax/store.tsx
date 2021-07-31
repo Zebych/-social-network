@@ -1,5 +1,5 @@
 import dialogsPageReducer, {AddMessageAC, UpdateNewMessageTextAC} from "./dialogsPage-reducer";
-import profileReducer, {AddPostAC, UpdateNewPostTextAC} from "./profile-reducer";
+import profileReducer, {AddPostAC, setUsersProfile, UpdateNewPostTextAC} from "./profile-reducer";
 import React from "react";
 
 export type PostsDataType = {
@@ -19,6 +19,7 @@ export type MessageType = {
 export type profilePageType = {
     PostsData: PostsDataType[]
     messageNewPostText: string
+    profile:null
 }
 export type dialogsPageType = {
     MessageData: MessageType[]
@@ -60,7 +61,7 @@ export type StoreType = {
 }
 
 export type Types = ReturnType<typeof AddPostAC> | ReturnType<typeof UpdateNewPostTextAC> |
-    ReturnType<typeof AddMessageAC> | ReturnType<typeof UpdateNewMessageTextAC>
+    ReturnType<typeof AddMessageAC> | ReturnType<typeof UpdateNewMessageTextAC>|ReturnType<typeof setUsersProfile>
 
 
 const store: StoreType = {
@@ -71,7 +72,8 @@ const store: StoreType = {
                 {id: 2, message: 'Yo', likesCount: 3},
                 {id: 3, message: 'YOyoYo', likesCount: 5}
             ],
-            messageNewPostText: ""
+            messageNewPostText: "",
+            profile:null,
         },
         dialogsPage: {
             DialogData: [

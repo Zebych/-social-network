@@ -1,10 +1,8 @@
 import React from 'react';
-import {Dispatch} from 'redux';
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redax/redux-store";
 import axios from 'axios';
 import Users from "./Users";
-import preloader from '../../assets/images/Preloader.gif'
 import {
     follow,
     InitialStateType,

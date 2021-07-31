@@ -1,8 +1,20 @@
-import {PostsDataType, profilePageType, Types} from "./store";
+import { Types} from "./store";
 import React from "react";
 
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const ADD_POST = 'ADD-POST'
+const SET_USERS_PROFILE = 'SET_USERS_PROFILE'
+
+export type PostsDataType = {
+    id: number
+    message: string
+    likesCount: number
+}
+export type profilePageType = {
+    PostsData: PostsDataType[]
+    messageNewPostText: string
+    profile:null
+}
 
 let initialState = {
     PostsData: [
@@ -10,7 +22,8 @@ let initialState = {
         {id: 2, message: 'Yo', likesCount: 3},
         {id: 3, message: 'YOyoYo', likesCount: 5}
     ],
-    messageNewPostText: "Enter message post"
+    messageNewPostText: "Enter message post",
+    profile: null,
 }
 
 const profileReducer: React.Reducer<profilePageType, Types> = (state = initialState, action): profilePageType => {
@@ -33,6 +46,11 @@ const profileReducer: React.Reducer<profilePageType, Types> = (state = initialSt
                 ...state,
                 messageNewPostText: action.newText
             }
+        case SET_USERS_PROFILE:
+            return {
+                ...state,
+                profile: action.profile
+            }
         default:
             return state
 
@@ -49,6 +67,12 @@ export const UpdateNewPostTextAC = (newText: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: newText
+    } as const
+}
+export const setUsersProfile = (profile: null) => {
+    return {
+        type: SET_USERS_PROFILE,
+        profile: profile
     } as const
 }
 
