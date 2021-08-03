@@ -17,7 +17,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
                     src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHgJ5gGZuqtluFKjVRaCEEmoWihm4LmHuwrw&usqp=CAU'}/>
             </div>
             <div>
-                <img src={props.profile.photo.large}/>
+                <img src={props.profile.photos.large}/>
             </div>
         </div>
     )
