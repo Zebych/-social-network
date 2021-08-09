@@ -7,7 +7,6 @@ type ProfileProps={
     profile:null
 }
 const Profile = (props:ProfileProps) => {
-
     return (
         <div className={c.profile}>
             <ProfileInfo profile={props.profile}/>

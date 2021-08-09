@@ -1,4 +1,4 @@
-import { Types} from "./store";
+import {Types} from "./store";
 import React from "react";
 
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
@@ -10,10 +10,11 @@ export type PostsDataType = {
     message: string
     likesCount: number
 }
+
 export type profilePageType = {
     PostsData: PostsDataType[]
     messageNewPostText: string
-    profile:null
+    profile: null
 }
 
 let initialState = {
