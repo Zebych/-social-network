@@ -1,10 +1,11 @@
 import React from "react";
 import c from './ProfileInfo.module.css'
 import Preloader from "../../commen/preloader/Preloader";
+import {ProfileType} from "../../../Redax/profile-reducer";
 
 
 type ProfileInfoPropsType = {
-    profile: any,
+    profile: ProfileType,
 }
 export const ProfileInfo = (props: ProfileInfoPropsType) => {
     if (!props.profile) {

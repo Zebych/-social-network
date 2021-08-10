@@ -10,11 +10,34 @@ export type PostsDataType = {
     message: string
     likesCount: number
 }
+type ContactsType={
+    facebook: string
+    github: string
+    instagram: string
+    mainLink: string
+    twitter: string
+    vk: string
+    website: string
+    youtube: string
+}
+type PhotosType={
+    large: string
+    small: string
+}
+export type ProfileType={
+    aboutMe:string
+    contacts:ContactsType
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    photos:PhotosType
+    userId:number
+}
 
 export type profilePageType = {
     PostsData: PostsDataType[]
     messageNewPostText: string
-    profile: null
+    profile: ProfileType
 }
 
 let initialState = {
@@ -24,7 +47,29 @@ let initialState = {
         {id: 3, message: 'YOyoYo', likesCount: 5}
     ],
     messageNewPostText: "Enter message post",
-    profile: null,
+    profile: {
+        aboutMe: '',
+        contacts:
+            {
+                facebook: '',
+                github: '',
+                instagram: '',
+                mainLink: '',
+                twitter: '',
+                vk: '',
+                website: '',
+                youtube: '',
+            },
+        fullName: "Any",
+        lookingForAJob: false,
+        lookingForAJobDescription: '',
+        photos:
+            {
+                large: '',
+                small: '',
+            },
+        userId: 18916,
+    },
 }
 
 const profileReducer: React.Reducer<profilePageType, Types> = (state = initialState, action): profilePageType => {
@@ -70,7 +115,7 @@ export const UpdateNewPostTextAC = (newText: string) => {
         newText: newText
     } as const
 }
-export const setUsersProfile = (profile: null) => {
+export const setUsersProfile = (profile: ProfileType) => {
     return {
         type: SET_USERS_PROFILE,
         profile: profile

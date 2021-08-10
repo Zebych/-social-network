@@ -2,9 +2,10 @@ import React from 'react';
 import c from './Profile.module.css';
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./Myposts/MyPostsContainer";
+import {ProfileType} from "../../Redax/profile-reducer";
 
 type ProfileProps={
-    profile:null
+    profile:ProfileType
 }
 const Profile = (props:ProfileProps) => {
     return (

@@ -2,8 +2,7 @@ import React from 'react';
 import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
-import {AppStateType} from "../../Redax/redux-store";
-import {profilePageType, setUsersProfile} from "../../Redax/profile-reducer";
+import { ProfileType, setUsersProfile} from "../../Redax/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {RootStateType} from "../../Redax/store";
 
@@ -12,10 +11,10 @@ type MathParamsType = {
     userId: string,
 }
 type MapStatePropsType = {
-    profile: any,
+    profile: ProfileType,
 }
 type MapDispatchPropsType = {
-    setUsersProfile: (profile: null) => void,
+    setUsersProfile: (profile: ProfileType) => void,
 }
 type ProfileContainerPropsType = MapStatePropsType & MapDispatchPropsType
 type PropsType = RouteComponentProps<MathParamsType> & ProfileContainerPropsType
@@ -34,7 +33,7 @@ class ProfileContainer extends React.Component<PropsType> {
     render() {
         return (
             <div>
-                <Profile {...this.props} profile={this.props.profile}/>{/*{...this.props}*/}
+                <Profile {...this.props} profile={this.props.profile}/>
             </div>);
     }
 }

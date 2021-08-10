@@ -1,5 +1,5 @@
 import dialogsPageReducer, {AddMessageAC, UpdateNewMessageTextAC} from "./dialogsPage-reducer";
-import profileReducer, {AddPostAC, setUsersProfile, UpdateNewPostTextAC} from "./profile-reducer";
+import profileReducer, {AddPostAC, ProfileType, setUsersProfile, UpdateNewPostTextAC} from "./profile-reducer";
 import React from "react";
 
 export type PostsDataType = {
@@ -19,25 +19,25 @@ export type MessageType = {
 export type profilePageType = {
     PostsData: PostsDataType[]
     messageNewPostText: string
-    profile:null
+    profile: ProfileType
 }
 export type dialogsPageType = {
     MessageData: MessageType[]
     DialogData: DialogDataType[]
     newMessage: string
 }
-type usersPageType={
-    users:Array<ArrayUsersType>
+type usersPageType = {
+    users: Array<ArrayUsersType>
 }
 type LocationType = {
     city: string,
     country: string,
 }
-type PhotosType={
-    small:string,
-    large:string,
+type PhotosType = {
+    small: string,
+    large: string,
 }
-type ArrayUsersType={
+type ArrayUsersType = {
     id: number,
     photos: PhotosType,
     name: string,
@@ -46,10 +46,11 @@ type ArrayUsersType={
     location: LocationType,
     uniqueUrlName: null,
 }
+
 export type RootStateType = {
     profilePage: profilePageType
     dialogsPage: dialogsPageType
-    usersPage:usersPageType
+    usersPage: usersPageType
 }
 
 export type StoreType = {
@@ -60,20 +61,43 @@ export type StoreType = {
     dispatch: (action: Types) => void
 }
 
+
 export type Types = ReturnType<typeof AddPostAC> | ReturnType<typeof UpdateNewPostTextAC> |
-    ReturnType<typeof AddMessageAC> | ReturnType<typeof UpdateNewMessageTextAC>|ReturnType<typeof setUsersProfile>
+    ReturnType<typeof AddMessageAC> | ReturnType<typeof UpdateNewMessageTextAC> | ReturnType<typeof setUsersProfile>
 
 
 const store: StoreType = {
-    _state: {
-        profilePage: {
-            PostsData: [
-                {id: 1, message: 'Hi,how a you?', likesCount: 2},
-                {id: 2, message: 'Yo', likesCount: 3},
-                {id: 3, message: 'YOyoYo', likesCount: 5}
-            ],
-            messageNewPostText: "",
-            profile:null,
+        _state: {
+            profilePage: {
+                PostsData: [
+                    {id: 1, message: 'Hi,how a you?', likesCount: 2},
+                    {id: 2, message: 'Yo', likesCount: 3},
+                    {id: 3, message: 'YOyoYo', likesCount: 5}
+                ],
+                messageNewPostText: "",
+                profile: {
+                    aboutMe: '',
+                    contacts:
+                        {
+                            facebook: '',
+                            github: '',
+                            instagram: '',
+                            mainLink: '',
+                            twitter: '',
+                            vk: '',
+                            website: '',
+                            youtube: '',
+                        },
+                    fullName: "Any",
+                    lookingForAJob: false,
+                    lookingForAJobDescription: '',
+                    photos:
+                        {
+                            large: '',
+                            small: '',
+                        },
+                    userId: 18916,
+                },
         },
         dialogsPage: {
             DialogData: [
@@ -89,57 +113,73 @@ const store: StoreType = {
             ],
             newMessage: ""
         },
-        usersPage:{
-            users:[
-                 {
-                       id: 1,
-                       photos: {small:'https://www.intermedia.ru/img/news_x350/358935.jpg',large:'https://www.intermedia.ru/img/news_x350/358935.jpg'} ,
-                       name: 'Dead Blonde',
-                       status: 'I am a boss too',
-                       followed: true,
-                       location: {city: 'Vladimir', country: 'Rassia'},
-                       uniqueUrlName:null
-                   },
-                   {
-                       id: 2,
-                       photos: {small:'https://www.intermedia.ru/img/news_x350/358935.jpg',large:'https://www.intermedia.ru/img/news_x350/358935.jpg'} ,
-                       name: 'Alex',
-                       status: 'I am a boss',
-                       followed: true,
-                       location: {city: 'Vladimir', country: 'Rassia'},
-                       uniqueUrlName:null
-                   },
-                   {
-                       id: 3,
-                       photos: {small:'https://www.intermedia.ru/img/news_x350/358935.jpg',
-                           large:'https://www.intermedia.ru/img/news_x350/358935.jpg'} ,
-                       name: 'Alex',
-                       status: 'I am a boss',
-                       followed: true,
-                       location: {city: 'Vladimir', country: 'Rassia'},
-                       uniqueUrlName:null
-                   },
+        usersPage: {
+            users: [
+                {
+                    id: 1,
+                    photos: {
+                        small: 'https://www.intermedia.ru/img/news_x350/358935.jpg',
+                        large: 'https://www.intermedia.ru/img/news_x350/358935.jpg'
+                    },
+                    name: 'Dead Blonde',
+                    status: 'I am a boss too',
+                    followed: true,
+                    location: {city: 'Vladimir', country: 'Rassia'},
+                    uniqueUrlName: null
+                },
+                {
+                    id: 2,
+                    photos: {
+                        small: 'https://www.intermedia.ru/img/news_x350/358935.jpg',
+                        large: 'https://www.intermedia.ru/img/news_x350/358935.jpg'
+                    },
+                    name: 'Alex',
+                    status: 'I am a boss',
+                    followed: true,
+                    location: {city: 'Vladimir', country: 'Rassia'},
+                    uniqueUrlName: null
+                },
+                {
+                    id: 3,
+                    photos: {
+                        small: 'https://www.intermedia.ru/img/news_x350/358935.jpg',
+                        large: 'https://www.intermedia.ru/img/news_x350/358935.jpg'
+                    },
+                    name: 'Alex',
+                    status: 'I am a boss',
+                    followed: true,
+                    location: {city: 'Vladimir', country: 'Rassia'},
+                    uniqueUrlName: null
+                },
             ],
         },
     },
 
 
-    subscribe(observer) {
-        this.renderTree = observer
-    },
-    renderTree() {
-        console.log("render")
-    },
-    getState() {
-        return this._state
-    },
+    subscribe
+(observer)
+{
+    this.renderTree = observer
+}
+,
+renderTree()
+{
+    console.log("render")
+}
+,
+getState()
+{
+    return this._state
+}
+,
 
-    dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.dialogsPage = dialogsPageReducer(this._state.dialogsPage, action)
+dispatch(action)
+{
+    this._state.profilePage = profileReducer(this._state.profilePage, action)
+    this._state.dialogsPage = dialogsPageReducer(this._state.dialogsPage, action)
 
-        this.renderTree()
-    }
+    this.renderTree()
+}
 
 }
 
