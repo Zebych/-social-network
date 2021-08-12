@@ -25,7 +25,6 @@ class ProfileContainer extends React.Component<PropsType> {
         let userId = this.props.match.params.userId
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then(response => {
-                debugger;
                 this.props.setUsersProfile(response.data)
             })
     }
