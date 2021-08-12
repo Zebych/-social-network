@@ -12,6 +12,7 @@ import {
     UserType
 } from "../../Redax/users-reducer";
 import Preloader from "../commen/preloader/Preloader";
+import {usersAPI} from "../../api/api";
 
 
 export type MapStatePropsType = {
@@ -33,25 +34,21 @@ export class UsersContainer extends React.Component<UsersContainerPropsType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}&count=${this.props.usersPage.pageSize}`,{
-            withCredentials:true
-        })
-            .then(response => {
+        usersAPI.getUsers(this.props.usersPage.currentPage,this.props.usersPage.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
             })
     }
 
     onPageChanged = (currentPage: number) => {
         this.props.setCurrentPage(currentPage)
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.usersPage.pageSize}`,{
-            withCredentials:true
-        })
-            .then(response => {
+        usersAPI.getUsers(currentPage,this.props.usersPage.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
             })
 
     }
