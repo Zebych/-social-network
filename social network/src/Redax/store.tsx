@@ -1,5 +1,5 @@
 import dialogsPageReducer, {AddMessageAC, UpdateNewMessageTextAC} from "./dialogsPage-reducer";
-import profileReducer, {AddPostAC, ProfileType, setUsersProfile, UpdateNewPostTextAC} from "./profile-reducer";
+import profileReducer, {addPostAC, ProfileType, setUsersProfile, updateNewPostTextAC} from "./profile-reducer";
 import React from "react";
 
 export type PostsDataType = {
@@ -62,7 +62,7 @@ export type StoreType = {
 }
 
 
-export type Types = ReturnType<typeof AddPostAC> | ReturnType<typeof UpdateNewPostTextAC> |
+export type Types = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> |
     ReturnType<typeof AddMessageAC> | ReturnType<typeof UpdateNewMessageTextAC> | ReturnType<typeof setUsersProfile>
 
 

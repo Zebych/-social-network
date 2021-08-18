@@ -1,5 +1,5 @@
 import {profilePageType} from "./store";
-import profileReducer, {AddPostAC, UpdateNewPostTextAC} from "./profile-reducer";
+import profileReducer, {addPostAC, updateNewPostTextAC} from "./profile-reducer";
 
 test ('correct post should be added',()=>{
     let startState:profilePageType = {
@@ -11,7 +11,7 @@ test ('correct post should be added',()=>{
         messageNewPostText: "Enter message post"
     }
     let postMessage="New message"
-    const endState=profileReducer(startState,AddPostAC(postMessage))
+    const endState=profileReducer(startState,addPostAC(postMessage))
 
     expect(endState.PostsData.length).toBe(4)
     expect(endState.PostsData[3].message).toBe(postMessage)
@@ -29,7 +29,7 @@ test ('correct post should be updated',()=>{
         messageNewPostText: "Enter message post"
     }
     let newText="updated post"
-    const endState=profileReducer(startState,UpdateNewPostTextAC(newText))
+    const endState=profileReducer(startState,updateNewPostTextAC(newText))
 
     expect(endState.messageNewPostText).toBe(newText)
 

@@ -1,16 +1,21 @@
-import {Types} from "./store";
 import React from "react";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
+import {AddMessageAC, UpdateNewMessageTextAC} from "./dialogsPage-reducer";
 
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const ADD_POST = 'ADD-POST'
 const SET_USERS_PROFILE = 'SET_USERS_PROFILE'
+
+export type ProfileTypeAC = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> |
+    ReturnType<typeof AddMessageAC> | ReturnType<typeof UpdateNewMessageTextAC> | ReturnType<typeof setUsersProfile>
 
 export type PostsDataType = {
     id: number
     message: string
     likesCount: number
 }
-type ContactsType={
+type ContactsType = {
     facebook: string
     github: string
     instagram: string
@@ -20,18 +25,18 @@ type ContactsType={
     website: string
     youtube: string
 }
-type PhotosType={
+type PhotosType = {
     large: string
     small: string
 }
-export type ProfileType={
-    aboutMe:string
-    contacts:ContactsType
+export type ProfileType = {
+    aboutMe: string
+    contacts: ContactsType
     fullName: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
-    photos:PhotosType
-    userId:number
+    photos: PhotosType
+    userId: number
 }
 
 export type profilePageType = {
@@ -72,7 +77,7 @@ let initialState = {
     },
 }
 
-const profileReducer: React.Reducer<profilePageType, Types> = (state = initialState, action): profilePageType => {
+const profileReducer: React.Reducer<profilePageType, ProfileTypeAC> = (state = initialState, action): profilePageType => {
 
     switch (action.type) {
         case ADD_POST:
@@ -103,13 +108,13 @@ const profileReducer: React.Reducer<profilePageType, Types> = (state = initialSt
     }
 }
 
-export const AddPostAC = (postMessage: string) => {
+export const addPostAC = (postMessage: string) => {
     return {
         type: ADD_POST,
         postMessage: postMessage
     } as const
 }
-export const UpdateNewPostTextAC = (newText: string) => {
+export const updateNewPostTextAC = (newText: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: newText
@@ -120,6 +125,15 @@ export const setUsersProfile = (profile: ProfileType) => {
         type: SET_USERS_PROFILE,
         profile: profile
     } as const
+}
+
+
+export const getProfile = (userId: string) => {
+    return (dispatch: Dispatch<ProfileTypeAC>) => {
+        usersAPI.getProfile(userId).then(response => {
+            dispatch(setUsersProfile(response.data))
+        })
+    }
 }
 
 export default profileReducer;
