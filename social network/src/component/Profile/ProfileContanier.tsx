@@ -7,13 +7,14 @@ import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {AppStateType} from "../../Redax/redux-store";
 import {InitialAuthStateType} from "../../Redax/auth-reducer";
 import WithAuthRedirect from "../../HOC/withAuthRedirect";
+import {compose} from 'redux';
 
 
 type MathParamsType = {
     userId: string,
 }
 type MapStatePropsType = {
-    profilePage: profilePageType|null,
+    profilePage: profilePageType | null,
 }
 type MapDispatchPropsType = {
     setUsersProfile: (profile: ProfileType) => void,
@@ -43,6 +44,7 @@ let mapStateToProps = (state: AppStateType) => ({
     profilePage: state.profilePage,
 })
 
-let WithUrlDataContainerComponent = withRouter(ProfileContainer)
-
-export default WithAuthRedirect(connect(mapStateToProps, {setUsersProfile})(WithUrlDataContainerComponent));
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {setUsersProfile}),
+    WithAuthRedirect,
+    withRouter)(ProfileContainer)

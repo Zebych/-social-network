@@ -5,6 +5,7 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redax/redux-store";
 import WithAuthRedirect from "../../HOC/withAuthRedirect";
+import { compose } from 'redux';
 
 type DialogDataType = {
     id: number,
@@ -38,6 +39,6 @@ const mapDispatchToProps=(dispatch:(action: Types) => void)=>{
     }
 }
 
-export default WithAuthRedirect(connect(mapStateToProps,mapDispatchToProps)(Dialogs));
-;
+export default compose<React.ComponentType>(WithAuthRedirect,connect(mapStateToProps,mapDispatchToProps))(Dialogs);
+
 
