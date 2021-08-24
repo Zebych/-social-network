@@ -2,13 +2,17 @@ import React, {ChangeEvent} from 'react';
 import c from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {Message} from "./Message/Message";
-import {dialogsPageType} from "../../Redax/store";
+import {dialogsPageType} from "./DialogsContainer";
+import {InitialAuthStateType} from "../../Redax/auth-reducer";
+import {Redirect} from "react-router-dom";
+// import {dialogsPageType} from "../../Redax/store";
 
 
 type PropsDialogType = {
-    dialogsPage: dialogsPageType
-    updateNewMessageBody: (body: string) => void
-    sendMessage: () => void
+    dialogsPage: dialogsPageType,
+    InitialAuthState:InitialAuthStateType,
+    updateNewMessageBody: (body: string) => void,
+    sendMessage: () => void,
 }
 
 
@@ -26,6 +30,10 @@ const Dialogs: React.FC<PropsDialogType> = (props) => {
     const ChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const body = e.target.value
         props.updateNewMessageBody(body)
+    }
+
+    if(!props.InitialAuthState.isAuth){
+        return<Redirect to={'/login'}/>
     }
     return (
         <div className={c.dialogs}>

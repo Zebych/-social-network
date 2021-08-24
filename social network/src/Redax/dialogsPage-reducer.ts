@@ -1,5 +1,6 @@
-import {dialogsPageType, Types} from "./store";
+import { Types} from "./store";
 import React from "react";
+import {dialogsPageType} from "../component/Dialogs/DialogsContainer";
 
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 const ADD_MESSAGE = 'ADD-MESSAGE'

@@ -2,7 +2,7 @@ import dialogsPageReducer, {AddMessageAC, UpdateNewMessageTextAC} from "./dialog
 import profileReducer, {AddPostAC, ProfileType, setUsersProfile, UpdateNewPostTextAC} from "./profile-reducer";
 import React from "react";
 
-export type PostsDataType = {
+ type PostsDataType = {
     id: number
     message: string
     likesCount: number
@@ -12,7 +12,7 @@ type DialogDataType = {
     id: number
     name: string
 }
-export type MessageType = {
+ type MessageType = {
     id: number
     message: string
 }
@@ -21,7 +21,7 @@ export type profilePageType = {
     messageNewPostText: string
     profile: ProfileType
 }
-export type dialogsPageType = {
+ type dialogsPageType = {
     MessageData: MessageType[]
     DialogData: DialogDataType[]
     newMessage: string

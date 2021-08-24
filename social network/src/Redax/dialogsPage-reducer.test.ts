@@ -1,5 +1,5 @@
 import dialogsPageReducer, {AddMessageAC, UpdateNewMessageTextAC} from "./dialogsPage-reducer";
-import { dialogsPageType} from "./store";
+import {dialogsPageType} from "../component/Dialogs/DialogsContainer";
 
 test('Correct message should be added',()=>{
     let startState:dialogsPageType = {

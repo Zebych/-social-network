@@ -1,12 +1,32 @@
 import React from 'react';
 import {AddMessageAC, UpdateNewMessageTextAC} from "../../Redax/dialogsPage-reducer";
-import { RootStateType, Types} from "../../Redax/store";
+import { Types} from "../../Redax/store";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
+import {AppStateType} from "../../Redax/redux-store";
+import {InitialAuthStateType} from "../../Redax/auth-reducer";
 
-const mapStateToProps=(state:RootStateType)=>{
+type DialogDataType = {
+    id: number,
+    name: string,
+}
+export type MessageType = {
+    id: number,
+    message: string,
+}
+export type dialogsPageType = {
+    MessageData: MessageType[],
+    DialogData: DialogDataType[],
+    newMessage: string,
+}
+type MapStateToPropsType={
+    dialogsPage:dialogsPageType,
+    InitialAuthState:InitialAuthStateType,
+}
+const mapStateToProps=(state:AppStateType):MapStateToPropsType=>{
     return{
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        InitialAuthState:state.auth,
     }
 }
 const mapDispatchToProps=(dispatch:(action: Types) => void)=>{
