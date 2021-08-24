@@ -32,9 +32,7 @@ const Dialogs: React.FC<PropsDialogType> = (props) => {
         props.updateNewMessageBody(body)
     }
 
-    if(!props.InitialAuthState.isAuth){
-        return<Redirect to={'/login'}/>
-    }
+
     return (
         <div className={c.dialogs}>
             <div className={c.dialogItem}>

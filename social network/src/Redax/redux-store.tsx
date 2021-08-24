@@ -1,22 +1,25 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import profileReducer from "./profile-reducer";
-import dialogsPageReducer from "./dialogsPage-reducer";
+import profileReducer, {addPostAC, setUsersProfile, updateNewPostTextAC} from "./profile-reducer";
+import dialogsPageReducer, {AddMessageAC, UpdateNewMessageTextAC} from "./dialogsPage-reducer";
 import React from "react";
 import usersReducer from "./users-reducer";
-import AuthReducer from "./auth-reducer";
+import authReducer from "./auth-reducer";
 import thunkMiddleware from "redux-thunk"
 
+export type AppStateType = ReturnType<typeof rootReducer>
 
 export const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsPageReducer,
     usersPage: usersReducer,
-    auth: AuthReducer,
+    auth: authReducer,
 })
-export type AppStateType = ReturnType<typeof rootReducer>
+
 
 export const store = createStore(rootReducer,applyMiddleware(thunkMiddleware))
 
+export type Types = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> |
+    ReturnType<typeof AddMessageAC> | ReturnType<typeof UpdateNewMessageTextAC> | ReturnType<typeof setUsersProfile>
 // @ts-ignore
 window.store=store;
 export default store;

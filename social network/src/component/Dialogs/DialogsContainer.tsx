@@ -4,7 +4,7 @@ import { Types} from "../../Redax/store";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redax/redux-store";
-import {InitialAuthStateType} from "../../Redax/auth-reducer";
+import WithAuthRedirect from "../../HOC/withAuthRedirect";
 
 type DialogDataType = {
     id: number,
@@ -21,12 +21,10 @@ export type dialogsPageType = {
 }
 type MapStateToPropsType={
     dialogsPage:dialogsPageType,
-    InitialAuthState:InitialAuthStateType,
 }
 const mapStateToProps=(state:AppStateType):MapStateToPropsType=>{
     return{
         dialogsPage: state.dialogsPage,
-        InitialAuthState:state.auth,
     }
 }
 const mapDispatchToProps=(dispatch:(action: Types) => void)=>{
@@ -39,7 +37,7 @@ const mapDispatchToProps=(dispatch:(action: Types) => void)=>{
         }
     }
 }
-const DialogsContainer=connect(mapStateToProps,mapDispatchToProps)(Dialogs)
 
-export default DialogsContainer;
+export default WithAuthRedirect(connect(mapStateToProps,mapDispatchToProps)(Dialogs));
+;
 
