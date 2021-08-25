@@ -2,7 +2,8 @@ import React from 'react';
 import {addPostAC, updateNewPostTextAC} from "../../../Redax/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
-import { RootStateType, Types} from "../../../Redax/store";
+import {Types} from "../../../Redax/redux-store";
+import { RootStateType} from "../../../Redax/store";
 
 
 const mapStateToProps = (state: RootStateType) => {

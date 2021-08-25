@@ -45,7 +45,7 @@ export type profilePageType = {
     status:string,
 }
 
-let initialState = {
+let initialState:profilePageType = {
     PostsData: [
         {id: 1, message: 'Hi,how a you?', likesCount: 2},
         {id: 2, message: 'Yo', likesCount: 3},

@@ -1,9 +1,8 @@
 import React from 'react';
 import {AddMessageAC, UpdateNewMessageTextAC} from "../../Redax/dialogsPage-reducer";
-import { Types} from "../../Redax/store";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import {AppStateType} from "../../Redax/redux-store";
+import {AppStateType, Types} from "../../Redax/redux-store";
 import WithAuthRedirect from "../../HOC/withAuthRedirect";
 import { compose } from 'redux';
 
