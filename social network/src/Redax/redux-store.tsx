@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import profileReducer, {addPostAC, setUsersProfile, updateNewPostTextAC} from "./profile-reducer";
+import profileReducer, {addPostAC, setStatus, setUsersProfile, updateNewPostTextAC} from "./profile-reducer";
 import dialogsPageReducer, {AddMessageAC, UpdateNewMessageTextAC} from "./dialogsPage-reducer";
 import React from "react";
 import usersReducer from "./users-reducer";
@@ -16,12 +16,17 @@ export const rootReducer = combineReducers({
 })
 
 
-export const store = createStore(rootReducer,applyMiddleware(thunkMiddleware))
+export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
-export type Types = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> |
-    ReturnType<typeof AddMessageAC> | ReturnType<typeof UpdateNewMessageTextAC> | ReturnType<typeof setUsersProfile>
+export type Types =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof AddMessageAC>
+    | ReturnType<typeof UpdateNewMessageTextAC>
+    | ReturnType<typeof setUsersProfile>
+    | ReturnType<typeof setStatus>
 // @ts-ignore
-window.store=store;
+window.store = store;
 export default store;
 
 

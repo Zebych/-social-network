@@ -7,6 +7,8 @@ import {ProfileStatus} from "./ProfileStatus";
 
 type ProfileInfoPropsType = {
     profilePage: profilePageType|null,
+    getStatus: (userId: string) => void,
+    updateStatus: (status: string) => void,
 }
 export const ProfileInfo = (props: ProfileInfoPropsType) => {
     if (!props.profilePage) {

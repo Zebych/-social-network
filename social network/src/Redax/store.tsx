@@ -20,6 +20,7 @@ export type profilePageType = {
     PostsData: PostsDataType[]
     messageNewPostText: string
     profile: ProfileType
+    status:string
 }
  type dialogsPageType = {
     MessageData: MessageType[]
@@ -98,6 +99,7 @@ const store: StoreType = {
                         },
                     userId: 18916,
                 },
+                status:'',
         },
         dialogsPage: {
             DialogData: [
