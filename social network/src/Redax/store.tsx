@@ -1,5 +1,5 @@
-import dialogsPageReducer, {AddMessageAC, UpdateNewMessageTextAC} from "./dialogsPage-reducer";
-import profileReducer, {addPostAC, ProfileType, setUsersProfile, updateNewPostTextAC} from "./profile-reducer";
+import dialogsPageReducer, {AddMessageAC} from "./dialogsPage-reducer";
+import profileReducer, {addPostAC, ProfileType, setUsersProfile} from "./profile-reducer";
 import React from "react";
 
  type PostsDataType = {
@@ -63,8 +63,8 @@ export type StoreType = {
 }
 
 
-export type Types = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> |
-    ReturnType<typeof AddMessageAC> | ReturnType<typeof UpdateNewMessageTextAC> | ReturnType<typeof setUsersProfile>
+export type Types = ReturnType<typeof addPostAC> |
+    ReturnType<typeof AddMessageAC>| ReturnType<typeof setUsersProfile>
 
 
 const store: StoreType = {
@@ -177,7 +177,7 @@ getState()
 
 dispatch(action)
 {
-    this._state.profilePage = profileReducer(this._state.profilePage, action)
+    // this._state.profilePage = profileReducer(this._state.profilePage, action)
     this._state.dialogsPage = dialogsPageReducer(this._state.dialogsPage, action)
 
     this.renderTree()

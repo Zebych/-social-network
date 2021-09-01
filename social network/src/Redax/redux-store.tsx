@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import profileReducer, {addPostAC, setStatus, setUsersProfile, updateNewPostTextAC} from "./profile-reducer";
-import dialogsPageReducer, {AddMessageAC, UpdateNewMessageTextAC} from "./dialogsPage-reducer";
+import profileReducer, {addPostAC, setStatus, setUsersProfile} from "./profile-reducer";
+import dialogsPageReducer, {AddMessageAC} from "./dialogsPage-reducer";
 import React from "react";
 import usersReducer from "./users-reducer";
 import authReducer from "./auth-reducer";
@@ -22,9 +22,7 @@ export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
 export type Types =
     ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof AddMessageAC>
-    | ReturnType<typeof UpdateNewMessageTextAC>
     | ReturnType<typeof setUsersProfile>
     | ReturnType<typeof setStatus>
 // @ts-ignore

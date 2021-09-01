@@ -2,7 +2,6 @@ import { Types} from "./store";
 import React from "react";
 import {dialogsPageType} from "../component/Dialogs/DialogsContainer";
 
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 const ADD_MESSAGE = 'ADD-MESSAGE'
 
 let initialState = {
@@ -24,7 +23,7 @@ const dialogsPageReducer: React.Reducer<dialogsPageType, Types> = (state = initi
 
     switch (action.type) {
         case ADD_MESSAGE:
-            let body = state.newMessage
+            let body = action.newMessageBody
             return {
                 ...state,
                 newMessage: '',
@@ -33,27 +32,17 @@ const dialogsPageReducer: React.Reducer<dialogsPageType, Types> = (state = initi
                     message: body
                 }]
             }
-
-        case UPDATE_NEW_MESSAGE_TEXT:
-            return {
-                ...state,
-                newMessage: action.newMassage
-            }
         default:
             return state
     }
 }
 
-export const AddMessageAC = () => {
+export const AddMessageAC = (newMessageBody:string) => {
     return {
         type: ADD_MESSAGE,
+        newMessageBody
     } as const
 }
-export const UpdateNewMessageTextAC = (body: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        newMassage: body
-    } as const
-}
+
 
 export default dialogsPageReducer;

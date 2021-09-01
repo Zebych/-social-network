@@ -1,10 +1,8 @@
-// import {Types} from "./store";
 import React from "react";
 import {Types} from "./redux-store";
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
 
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const ADD_POST = 'ADD-POST'
 const SET_USERS_PROFILE = 'SET_USERS_PROFILE'
 const SET_STATUS = 'SET_STATUS'
@@ -40,7 +38,6 @@ export type ProfileType = {
 
 export type profilePageType = {
     PostsData: PostsDataType[],
-    messageNewPostText: string,
     profile: ProfileType,
     status:string,
 }
@@ -51,7 +48,6 @@ let initialState:profilePageType = {
         {id: 2, message: 'Yo', likesCount: 3},
         {id: 3, message: 'YOyoYo', likesCount: 5}
     ],
-    messageNewPostText: "Enter message post",
     profile: {
         aboutMe: '',
         contacts:
@@ -90,13 +86,6 @@ const profileReducer: React.Reducer<profilePageType, Types> = (state = initialSt
             return {
                 ...state,
                 PostsData: [...state.PostsData, newPost],
-                messageNewPostText: ''
-            }
-
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                messageNewPostText: action.newText
             }
         case SET_USERS_PROFILE:
             return {
@@ -124,12 +113,6 @@ export const setStatus = (status: string) => {
     return {
         type: SET_STATUS,
         status
-    } as const
-}
-export const updateNewPostTextAC = (newText: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: newText
     } as const
 }
 export const setUsersProfile = (profile: ProfileType) => {
