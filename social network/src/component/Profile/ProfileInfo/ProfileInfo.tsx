@@ -1,6 +1,6 @@
 import React from "react";
 import c from './ProfileInfo.module.css'
-import Preloader from "../../commen/preloader/Preloader";
+import Preloader from "../../commen/Preloader/Preloader";
 import {profilePageType} from "../../../Redax/profile-reducer";
 import {ProfileStatus} from "./ProfileStatus";
 

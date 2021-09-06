@@ -9,7 +9,7 @@ import {
     unfollowSuccess,
     getUsersThunk,
 } from "../../Redax/users-reducer";
-import Preloader from "../commen/preloader/Preloader";
+import Preloader from "../commen/Preloader/Preloader";
 import WithAuthRedirect from "../../HOC/withAuthRedirect";
 import {compose} from 'redux';
 
