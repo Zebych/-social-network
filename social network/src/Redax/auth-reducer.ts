@@ -53,12 +53,12 @@ export const getAuthUserData = () => (dispatch: Dispatch<AuthTypeAC>) => {
             }
         })
 }
-export const LoginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
+export const LoginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
     dispatch(stopSubmit('login', {_error: 'Common error'}))
     authAPI.login(email, password, rememberMe)
         .then(response => {
             if (response.data.resultCode === 0) {
-                getAuthUserData()//dispatch()
+                dispatch(getAuthUserData())
             } else {
                 let message = response.data.messages.length > 0 ? response.data.messages[0]: 'Some error'
                 dispatch(stopSubmit('login', {_error: message}))
