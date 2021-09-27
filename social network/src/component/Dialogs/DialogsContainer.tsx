@@ -35,6 +35,6 @@ const mapDispatchToProps=(dispatch:(action: Types) => void)=>{
     }
 }
 
-export default compose<React.ComponentType>(WithAuthRedirect,connect(mapStateToProps,mapDispatchToProps))(Dialogs);
+export default compose<React.ComponentType>(/*WithAuthRedirect,*/connect(mapStateToProps,mapDispatchToProps))(Dialogs);
 
 
