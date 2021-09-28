@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getStatus, getUsersProfile, profilePageType, updateStatus,} from "../../Redax/profile-reducer";
+import {getStatus, getUsersProfile, InitialStateType, updateStatus,} from "../../Redax/profile-reducer";
 import { RouteComponentProps, withRouter} from "react-router-dom";
 import {AppStateType} from "../../Redax/redux-store";
 import {compose} from 'redux';
@@ -11,8 +11,8 @@ type MathParamsType = {
     userId: string,
 }
 type MapStatePropsType = {
-    profilePage: profilePageType | null,
-    authorizedUserId:string,
+    profilePage: InitialStateType | null,
+    authorizedUserId:number|null,
 }
 type MapDispatchPropsType = {
     getUsersProfile: (userId: string) => void,
@@ -27,8 +27,8 @@ class ProfileContainer extends React.Component<PropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = "2"
-            // userId = this.props.authorizedUserId
+            // userId = "2"
+            let userId = this.props.authorizedUserId
             if(!userId){
                 this.props.history.push(('/login'))
             }
@@ -45,9 +45,9 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 }
 
-let mapStateToProps = (state: AppStateType) => ({
+let mapStateToProps = (state: AppStateType):MapStatePropsType => ({
     profilePage: state.profilePage,
-    // authorizedUserId:state.auth,
+    authorizedUserId:state.auth.id,
 })
 
 export default compose<React.ComponentType>(

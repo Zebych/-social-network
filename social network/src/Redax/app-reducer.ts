@@ -14,7 +14,7 @@ let initialState: InitialAuthStateType = {
     initialized: false,
 }
 
-const AppReducer: React.Reducer<InitialAuthStateType, AuthTypeAC> = (state = initialState, action)
+const AppReducer = (state:InitialAuthStateType = initialState, action:AuthTypeAC)
     : InitialAuthStateType => {
     switch (action.type) {
         case INITIALIZED_SUCCESS:

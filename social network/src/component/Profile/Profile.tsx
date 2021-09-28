@@ -2,10 +2,10 @@ import React from 'react';
 import c from './Profile.module.css';
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./Myposts/MyPostsContainer";
-import {profilePageType} from "../../Redax/profile-reducer";
+import {InitialStateType} from "../../Redax/profile-reducer";
 
 type ProfileProps={
-    profilePage:profilePageType|null,
+    profilePage:InitialStateType|null,
     getStatus: (userId: string) => void,
     updateStatus: (status: string) => void,
 }

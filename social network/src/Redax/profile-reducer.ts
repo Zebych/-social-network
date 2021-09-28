@@ -36,13 +36,13 @@ export type ProfileType = {
     userId: number,
 }
 
-export type profilePageType = {
+export type InitialStateType = {
     PostsData: PostsDataType[],
     profile: ProfileType,
     status:string,
 }
 
-let initialState:profilePageType = {
+let initialState:InitialStateType = {
     PostsData: [
         {id: 1, message: 'Hi,how a you?', likesCount: 2},
         {id: 2, message: 'Yo', likesCount: 3},
@@ -74,7 +74,7 @@ let initialState:profilePageType = {
     status: '',
 }
 
-const profileReducer: React.Reducer<profilePageType, Types> = (state = initialState, action): profilePageType => {
+const profileReducer = (state:InitialStateType = initialState, action:Types): InitialStateType => {
 
     switch (action.type) {
         case ADD_POST:

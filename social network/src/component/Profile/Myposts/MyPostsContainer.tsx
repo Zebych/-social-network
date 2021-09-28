@@ -1,12 +1,17 @@
 import React from 'react';
 import {addPostAC} from "../../../Redax/profile-reducer";
-import MyPosts from "./MyPosts";
+import MyPosts, {PostsDataType} from "./MyPosts";
 import {connect} from "react-redux";
 import {Types} from "../../../Redax/redux-store";
 import { RootStateType} from "../../../Redax/store";
 
 
-const mapStateToProps = (state: RootStateType) => {
+type MapStateToPropsType={
+    PostsData:Array<PostsDataType>,
+    newPostText:string,
+}
+
+const mapStateToProps = (state: RootStateType):MapStateToPropsType => {
     return {
         PostsData: state.profilePage.PostsData,
         newPostText: state.profilePage.messageNewPostText

@@ -19,7 +19,7 @@ let initialState = {
     newMessage: ""
 }
 
-const dialogsPageReducer: React.Reducer<dialogsPageType, Types> = (state = initialState, action): dialogsPageType => {
+const dialogsPageReducer = (state:dialogsPageType = initialState, action:Types): dialogsPageType => {
 
     switch (action.type) {
         case ADD_MESSAGE:

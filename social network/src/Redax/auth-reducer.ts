@@ -14,7 +14,6 @@ export type InitialAuthStateType = {
     email: string | null,
     login: string | null,
     isAuth: boolean,
-
 }
 
 let initialState: InitialAuthStateType = {
@@ -24,7 +23,7 @@ let initialState: InitialAuthStateType = {
     isAuth: false,
 }
 
-const AuthReducer: React.Reducer<InitialAuthStateType, AuthTypeAC> = (state = initialState, action)
+const AuthReducer = (state:InitialAuthStateType = initialState, action:AuthTypeAC)
     : InitialAuthStateType => {
     switch (action.type) {
         case SET_USER_DATA:

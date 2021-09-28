@@ -1,13 +1,12 @@
 import React from "react";
 import c from './ProfileInfo.module.css'
 import Preloader from "../../commen/Preloader/Preloader";
-import {profilePageType} from "../../../Redax/profile-reducer";
+import {InitialStateType} from "../../../Redax/profile-reducer";
 import {ProfileStatus} from "./ProfileStatus";
 
 
 type ProfileInfoPropsType = {
-
-    profilePage: profilePageType|null,
+    profilePage: InitialStateType|null,
     getStatus: (userId: string) => void,
     updateStatus: (status: string) => void,
 }

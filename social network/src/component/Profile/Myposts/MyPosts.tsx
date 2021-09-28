@@ -6,7 +6,7 @@ import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../commen/FormControls/FormControls";
 
 
-type PostsDataType = {
+export type PostsDataType = {
     id: number
     message: string
     likesCount: number

@@ -6,7 +6,9 @@ import {AppStateType} from "../../Redax/redux-store";
 
 
 type MapStateToPropsType = {
-    auth: InitialAuthStateType
+    // auth: InitialAuthStateType
+    login: string | null,
+    isAuth:boolean,
 }
 type MapDispatchToPropsType = {
     setAuthUserData: (id: null | number, email: null | string, login: null | string, isAuth: boolean) => void,
@@ -26,7 +28,8 @@ class HeaderContainer extends React.Component <HeaderContainerPropsType> {
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-    auth: state.auth
+    login: state.auth.login,
+    isAuth:state.auth.isAuth,
 })
 
 export default connect(mapStateToProps, {setAuthUserData, Logout})(HeaderContainer);

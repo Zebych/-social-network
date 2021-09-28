@@ -35,28 +35,27 @@ export type UserType = {
     followed: boolean,
     location: LocationType,
     uniqueUrlName: null,
-
 }
-export type InitialStateType = {
+/*export type InitialStateType = {
     users: Array<UserType>,
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
     isFetching: boolean,
     followingInProgress: Array<number>,
-}
+}*/
 
-let initialState: InitialStateType = {
-    users: [],
+let initialState = {
+    users: [] as UserType[],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: [],
+    followingInProgress: [] as number[],
 }
-
-const usersReducer: React.Reducer<InitialStateType, UsersTypeAC> = (state = initialState, action)
-    : InitialStateType => {
+export type InitialStateType = typeof initialState
+//React.Reducer<InitialStateType, UsersTypeAC>
+const usersReducer = (state: InitialStateType = initialState, action: UsersTypeAC): InitialStateType => {
 
     switch (action.type) {
         case FOLLOW:
