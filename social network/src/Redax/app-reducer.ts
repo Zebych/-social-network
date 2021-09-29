@@ -1,21 +1,18 @@
-import React from "react";
 import {Dispatch} from "redux";
 import {getAuthUserData} from "./auth-reducer";
 
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS'
 
 export type AuthTypeAC = ReturnType<typeof initializedSuccess>
-export type InitialAuthStateType = {
-    initialized: boolean
+type InitialStateType = typeof initialState
 
-}
-
-let initialState: InitialAuthStateType = {
+let initialState = {
     initialized: false,
 }
 
-const AppReducer = (state:InitialAuthStateType = initialState, action:AuthTypeAC)
-    : InitialAuthStateType => {
+
+const AppReducer = (state:InitialStateType = initialState, action:AuthTypeAC)
+    : InitialStateType => {
     switch (action.type) {
         case INITIALIZED_SUCCESS:
             return {

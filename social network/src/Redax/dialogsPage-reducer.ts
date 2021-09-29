@@ -1,8 +1,8 @@
 import { Types} from "./store";
-import React from "react";
-import {dialogsPageType} from "../component/Dialogs/DialogsContainer";
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
+
+type InitialStateType = typeof initialState
 
 let initialState = {
     DialogData: [
@@ -19,7 +19,7 @@ let initialState = {
     newMessage: ""
 }
 
-const dialogsPageReducer = (state:dialogsPageType = initialState, action:Types): dialogsPageType => {
+const dialogsPageReducer = (state:InitialStateType = initialState, action:Types): InitialStateType => {
 
     switch (action.type) {
         case ADD_MESSAGE:

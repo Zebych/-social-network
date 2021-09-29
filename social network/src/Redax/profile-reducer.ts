@@ -1,4 +1,3 @@
-import React from "react";
 import {Types} from "./redux-store";
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
@@ -7,12 +6,12 @@ const ADD_POST = 'ADD-POST'
 const SET_USERS_PROFILE = 'SET_USERS_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
-export type PostsDataType = {
+/*export type PostsDataType = {
     id: number,
     message: string,
     likesCount: number,
-}
-type ContactsType = {
+}*/
+/*type ContactsType = {
     facebook: string,
     github: string,
     instagram: string,
@@ -34,15 +33,18 @@ export type ProfileType = {
     lookingForAJobDescription: string,
     photos: PhotosType,
     userId: number,
-}
+}*/
 
-export type InitialStateType = {
+/*export type InitialStateType = {
     PostsData: PostsDataType[],
     profile: ProfileType,
     status:string,
-}
+}*/
+export type InitialStateType = typeof initialState
+export type ProfileStateType = typeof initialState.profile
+type PostsDataStateType =  typeof initialState.PostsData[0]
 
-let initialState:InitialStateType = {
+let initialState = {
     PostsData: [
         {id: 1, message: 'Hi,how a you?', likesCount: 2},
         {id: 2, message: 'Yo', likesCount: 3},
@@ -78,7 +80,7 @@ const profileReducer = (state:InitialStateType = initialState, action:Types): In
 
     switch (action.type) {
         case ADD_POST:
-            const newPost: PostsDataType = {
+            const newPost: PostsDataStateType = {
                 id: 4,
                 message: action.postMessage,
                 likesCount: 0
@@ -115,7 +117,7 @@ export const setStatus = (status: string) => {
         status
     } as const
 }
-export const setUsersProfile = (profile: ProfileType) => {
+export const setUsersProfile = (profile: ProfileStateType) => {
     return {
         type: SET_USERS_PROFILE,
         profile: profile

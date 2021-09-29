@@ -1,5 +1,5 @@
 import dialogsPageReducer, {AddMessageAC} from "./dialogsPage-reducer";
-import profileReducer, {addPostAC, ProfileType, setUsersProfile} from "./profile-reducer";
+import profileReducer, {addPostAC, ProfileStateType, setUsersProfile} from "./profile-reducer";
 import React from "react";
 
  type PostsDataType = {
@@ -19,7 +19,7 @@ type DialogDataType = {
 export type profilePageType = {
     PostsData: PostsDataType[]
     messageNewPostText: string
-    profile: ProfileType
+    profile: ProfileStateType
     status:string
 }
  type dialogsPageType = {
