@@ -1,8 +1,22 @@
 import {AppStateType} from "./redux-store";
-import {InitialStateType, UserType} from "./users-reducer";
+import {UserType} from "./users-reducer";
 
 
-/*
-export const getUsers=(state:AppStateType):Array<UserType>=>{
+export const getUsers = (state: AppStateType): Array<UserType> => {
     return state.usersPage.users
-}*/
+}
+export const getCurrentPage = (state: AppStateType): number => {
+    return state.usersPage.currentPage
+}
+export const getPageSize = (state: AppStateType): number => {
+    return state.usersPage.pageSize
+}
+export const getIsFetching = (state: AppStateType): boolean => {
+    return state.usersPage.isFetching
+}
+export const getTotalUsersCount = (state: AppStateType): number => {
+    return state.usersPage.totalUsersCount
+}
+export const getFollowingInProgress = (state: AppStateType): Array<number> => {
+    return state.usersPage.followingInProgress
+}

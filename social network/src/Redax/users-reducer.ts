@@ -125,8 +125,8 @@ export const unfollowSuccess = (userId: number) => {
 export const setUsers = (users: UserType[]) => {
     return {type: SET_USERS, users} as const
 }
-export const setCurrentPage = (currentPage: number) => {
-    return {type: SET_CURRENT_PAGE, currentPage} as const
+export const setCurrentPage = (page: number) => {
+    return {type: SET_CURRENT_PAGE, currentPage: page} as const
 }
 export const setTotalUsersCount = (totalCount: number) => {
     return {type: SET_TOTAL_COUNT_PAGE, totalCount} as const
@@ -139,11 +139,12 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
 }
 
 
-export const getUsersThunk = (currentPage: number, pageSize: number) => {
+export const requestUsers = (page: number, pageSize: number) => {
 
     return (dispatch: Dispatch<UsersTypeAC>) => {
         dispatch(toggleIsFetching(true))
-        usersAPI.getUsers(currentPage, pageSize)
+        dispatch(setCurrentPage(page))
+        usersAPI.getUsers(page, pageSize)
             .then(data => {
                 dispatch(toggleIsFetching(false))
                 dispatch(setUsers(data.items))
