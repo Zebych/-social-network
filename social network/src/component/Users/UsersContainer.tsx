@@ -22,7 +22,7 @@ import {
 
 
 export type MapStatePropsType = {
-    users: Array<UserType>,
+    users:Array<UserType>,
     currentPage:number,
     pageSize:number,
     isFetching:boolean,
@@ -71,13 +71,7 @@ export class UsersContainer extends React.Component<UsersContainerPropsType> {
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        // users: state.usersPage.users,
-        // currentPage:state.usersPage.currentPage,
-        // pageSize:state.usersPage.pageSize,
-        // isFetching:state.usersPage.isFetching,
-        // totalUsersCount:state.usersPage.totalUsersCount,
-        // followingInProgress:state.usersPage.followingInProgress,
-
+        // users: getUsersSuper(state),//reselect
         users: getUsers(state),
         currentPage:getCurrentPage(state),
         pageSize:getPageSize(state),
