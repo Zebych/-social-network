@@ -3,6 +3,7 @@ import c from './ProfileInfo.module.css'
 import Preloader from "../../commen/Preloader/Preloader";
 import {InitialStateType} from "../../../Redax/profile-reducer";
 import {ProfileStatus} from "./ProfileStatus";
+import {ProfileStatusHook} from "./ProfileStatusWithHooks";
 
 
 type ProfileInfoPropsType = {
@@ -22,7 +23,8 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
             </div>
             <div>
                 <img src={props.profilePage.profile.photos.large}/>
-                <ProfileStatus status={props.profilePage.status}updateStatus={props.updateStatus}/>
+                {/*<ProfileStatus status={props.profilePage.status}updateStatus={props.updateStatus}/>*/}
+                <ProfileStatusHook status={props.profilePage.status}updateStatus={props.updateStatus}/>
             </div>
         </div>
     );
