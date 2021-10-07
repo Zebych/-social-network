@@ -12,11 +12,15 @@ type LocalStateType = {
     status: string,
 }
 
-export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
+export class ProfileStatus extends React.PureComponent<ProfileStatusPropsType> {
     state: LocalStateType = {
         editMode: false,
         status: this.props.status,
     }
+
+ /*   shouldComponentUpdate(nextProps: Readonly<ProfileStatusPropsType>, nextState: Readonly<{}>, nextContext: any): boolean {
+        return nextProps != this.props || nextState != this.state
+    }*/
 
     activateEditMode = () => {
         this.setState({

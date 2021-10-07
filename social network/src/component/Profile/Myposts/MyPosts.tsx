@@ -18,7 +18,7 @@ type PropsType = {
 }
 
 
-const MyPosts: React.FC<PropsType> = (props) => {
+const MyPosts: React.FC<PropsType> =React.memo( (props) => {
     const PostsElement = props.PostsData.map(p => <Post message={p.message} likeCount={p.likesCount}/>)
 
     const onAddPost = (newText: AddPostPropsType) => {
@@ -38,7 +38,7 @@ const MyPosts: React.FC<PropsType> = (props) => {
             </div>
             {PostsElement}
         </div>);
-}
+})
 
 type AddPostPropsType = {
     updateNewPostText: string,
