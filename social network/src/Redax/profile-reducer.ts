@@ -6,44 +6,6 @@ const ADD_POST = 'ADD-POST'
 const SET_USERS_PROFILE = 'SET_USERS_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
-/*export type PostsDataType = {
-    id: number,
-    message: string,
-    likesCount: number,
-}*/
-/*type ContactsType = {
-    facebook: string,
-    github: string,
-    instagram: string,
-    mainLink: string,
-    twitter: string,
-    vk: string,
-    website: string,
-    youtube: string,
-}
-export type PhotosType = {
-    large: string,
-    small: string,
-}
-export type ProfileType = {
-    aboutMe: string,
-    contacts: ContactsType,
-    fullName: string,
-    lookingForAJob: boolean,
-    lookingForAJobDescription: string,
-    photos: PhotosType,
-    userId: number,
-}*/
-
-/*export type InitialStateType = {
-    PostsData: PostsDataType[],
-    profile: ProfileType,
-    status:string,
-}*/
-export type InitialStateType = typeof initialState
-export type ProfileStateType = typeof initialState.profile
-type PostsDataStateType =  typeof initialState.PostsData[0]
-
 let initialState = {
     PostsData: [
         {id: 1, message: 'Hi,how a you?', likesCount: 2},
@@ -104,7 +66,7 @@ const profileReducer = (state:InitialStateType = initialState, action:Types): In
 
     }
 }
-
+//Action
 export const addPostAC = (postMessage: string) => {
     return {
         type: ADD_POST,
@@ -123,6 +85,8 @@ export const setUsersProfile = (profile: ProfileStateType) => {
         profile: profile
     } as const
 }
+
+//Thunk
 export const getUsersProfile = (userId: string) => (dispatch: Dispatch) => {
     profileAPI.getProfile(userId)
         .then(response => {
@@ -145,5 +109,8 @@ export const updateStatus = (status: string) => (dispatch: Dispatch) => {
         })
 }
 
-
+//Types
+export type InitialStateType = typeof initialState
+export type ProfileStateType = typeof initialState.profile
+type PostsDataStateType =  typeof initialState.PostsData[0]
 export default profileReducer;

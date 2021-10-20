@@ -1,20 +1,8 @@
-import React from "react";
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
-
 const SET_USER_DATA = 'SET_USER_DATA'
-
-export type AuthTypeAC = ReturnType<typeof setAuthUserData>
-
-
-export type InitialAuthStateType = {
-    id: number | null,
-    email: string | null,
-    login: string | null,
-    isAuth: boolean,
-}
 
 let initialState: InitialAuthStateType = {
     id: null,
@@ -71,6 +59,18 @@ export const Logout = () => (dispatch: Dispatch) => {
                 dispatch(setAuthUserData(null, null, null, false))
             }
         })
+}
+
+//Types
+
+export type AuthTypeAC = ReturnType<typeof setAuthUserData>
+
+
+export type InitialAuthStateType = {
+    id: number | null,
+    email: string | null,
+    login: string | null,
+    isAuth: boolean,
 }
 
 export default AuthReducer;

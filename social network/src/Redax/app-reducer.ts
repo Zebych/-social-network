@@ -3,13 +3,9 @@ import {getAuthUserData} from "./auth-reducer";
 
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS'
 
-export type AuthTypeAC = ReturnType<typeof initializedSuccess>
-type InitialStateType = typeof initialState
-
 let initialState = {
     initialized: false,
 }
-
 
 const AppReducer = (state:InitialStateType = initialState, action:AuthTypeAC)
     : InitialStateType => {
@@ -35,5 +31,9 @@ export const initializeApp = () => (dispatch: Dispatch<any>) => {
         dispatch(initializedSuccess())
     })
 }
+//Types
+
+export type AuthTypeAC = ReturnType<typeof initializedSuccess>
+export type InitialStateType = typeof initialState
 
 export default AppReducer;

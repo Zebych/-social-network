@@ -2,8 +2,6 @@ import { Types} from "./store";
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
 
-type InitialStateType = typeof initialState
-
 let initialState = {
     DialogData: [
         {id: 1, name: 'Sasha'},
@@ -36,7 +34,7 @@ const dialogsPageReducer = (state:InitialStateType = initialState, action:Types)
             return state
     }
 }
-
+//Actions
 export const AddMessageAC = (newMessageBody:string) => {
     return {
         type: ADD_MESSAGE,
@@ -44,5 +42,8 @@ export const AddMessageAC = (newMessageBody:string) => {
     } as const
 }
 
+//Types
+
+type InitialStateType = typeof initialState
 
 export default dialogsPageReducer;
