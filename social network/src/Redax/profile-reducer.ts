@@ -2,9 +2,12 @@ import {Types} from "./redux-store";
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
 
-const ADD_POST = 'ADD-POST'
-const SET_USERS_PROFILE = 'SET_USERS_PROFILE'
-const SET_STATUS = 'SET_STATUS'
+enum ActionProfileType {
+    ADD_POST = 'profile/ADD-POST',
+    SET_USERS_PROFILE = 'profile/SET_USERS_PROFILE',
+    SET_STATUS = 'profile/SET_STATUS',
+}
+
 
 let initialState = {
     PostsData: [
@@ -38,10 +41,10 @@ let initialState = {
     status: '',
 }
 
-const profileReducer = (state:InitialStateType = initialState, action:Types): InitialStateType => {
+const profileReducer = (state: InitialStateType = initialState, action: Types): InitialStateType => {
 
     switch (action.type) {
-        case ADD_POST:
+        case ActionProfileType.ADD_POST:
             const newPost: PostsDataStateType = {
                 id: 4,
                 message: action.postMessage,
@@ -51,12 +54,12 @@ const profileReducer = (state:InitialStateType = initialState, action:Types): In
                 ...state,
                 PostsData: [...state.PostsData, newPost],
             }
-        case SET_USERS_PROFILE:
+        case ActionProfileType.SET_USERS_PROFILE:
             return {
                 ...state,
                 profile: action.profile
             }
-        case SET_STATUS:
+        case ActionProfileType.SET_STATUS:
             return {
                 ...state,
                 status: action.status
@@ -69,48 +72,43 @@ const profileReducer = (state:InitialStateType = initialState, action:Types): In
 //Action
 export const addPostAC = (postMessage: string) => {
     return {
-        type: ADD_POST,
+        type: ActionProfileType.ADD_POST,
         postMessage: postMessage
     } as const
 }
 export const setStatus = (status: string) => {
     return {
-        type: SET_STATUS,
+        type: ActionProfileType.SET_STATUS,
         status
     } as const
 }
 export const setUsersProfile = (profile: ProfileStateType) => {
     return {
-        type: SET_USERS_PROFILE,
+        type: ActionProfileType.SET_USERS_PROFILE,
         profile: profile
     } as const
 }
 
 //Thunk
-export const getUsersProfile = (userId: string) => (dispatch: Dispatch) => {
-    profileAPI.getProfile(userId)
-        .then(response => {
-            dispatch(setUsersProfile(response.data))
-        })
+export const getUsersProfile = (userId: string) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.getProfile(userId)
+    dispatch(setUsersProfile(response.data))
 }
-export const getStatus = (userId: string) => (dispatch: Dispatch) => {
-    profileAPI.getStatus(userId)
-        .then(response => {
-            dispatch(setStatus(response.data))
-        })
-}
-export const updateStatus = (status: string) => (dispatch: Dispatch) => {
-    profileAPI.updateStatus(status)
-        .then(response => {
-            if(response.data.resultCode===0){
-                dispatch(setStatus(status))
-            }
 
-        })
+export const getStatus = (userId: string) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.getStatus(userId)
+    dispatch(setStatus(response.data))
+}
+
+export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setStatus(status))
+    }
 }
 
 //Types
 export type InitialStateType = typeof initialState
 export type ProfileStateType = typeof initialState.profile
-type PostsDataStateType =  typeof initialState.PostsData[0]
+type PostsDataStateType = typeof initialState.PostsData[0]
 export default profileReducer;

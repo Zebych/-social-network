@@ -1,4 +1,4 @@
-import AuthReducer, {InitialAuthStateType, setAuthUserData} from "./auth-reducer";
+import authReducer, {InitialAuthStateType, setAuthUserData} from "./auth-reducer";
 
 const startState: InitialAuthStateType = {
     id: null,
@@ -9,21 +9,21 @@ const startState: InitialAuthStateType = {
 
 test(' status login', () => {
 
-    const endState = AuthReducer(startState, setAuthUserData(
+    const endState = authReducer(startState, setAuthUserData(
         null, null, null, true))
 
     expect(endState.isAuth).toBe(true)
 })
 test(' status logout', () => {
 
-    const endState = AuthReducer(startState, setAuthUserData(
+    const endState = authReducer(startState, setAuthUserData(
         null, null, null, false))
 
     expect(endState.isAuth).toBe(false)
 })
 test('get user data', () => {
 
-    const endState = AuthReducer(startState, setAuthUserData(
+    const endState = authReducer(startState, setAuthUserData(
         1, '@mail', 'login', true))
 
     expect(endState.isAuth).toBe(true)

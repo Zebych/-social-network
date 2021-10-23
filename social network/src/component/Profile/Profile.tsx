@@ -4,15 +4,15 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./Myposts/MyPostsContainer";
 import {InitialStateType} from "../../Redax/profile-reducer";
 
-type ProfileProps={
-    profilePage:InitialStateType|null,
+type ProfileProps = {
+    profilePage: InitialStateType | null,
     getStatus: (userId: string) => void,
     updateStatus: (status: string) => void,
 }
-const Profile = (props:ProfileProps) => {
+const Profile: React.FC<ProfileProps> = ({profilePage, getStatus, updateStatus}) => {
     return (
         <div className={c.profile}>
-            <ProfileInfo profilePage={props.profilePage} getStatus={props.getStatus} updateStatus={props.updateStatus}/>
+            <ProfileInfo profilePage={profilePage} getStatus={getStatus} updateStatus={updateStatus}/>
             <MyPostsContainer/>
         </div>);
 }

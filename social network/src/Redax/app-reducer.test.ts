@@ -1,4 +1,4 @@
-import AppReducer, {initializedSuccess, InitialStateType} from "./app-reducer";
+import appReducer, {initializedSuccess, InitialStateType} from "./app-reducer";
 
 const startState: InitialStateType = {
     initialized: false,
@@ -6,7 +6,7 @@ const startState: InitialStateType = {
 
 test('initialized', () => {
 
-    const endState = AppReducer(startState, initializedSuccess())
+    const endState = appReducer(startState, initializedSuccess())
 
     expect(endState.initialized).toBe(true)
 })

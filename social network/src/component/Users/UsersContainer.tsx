@@ -22,12 +22,12 @@ import {
 
 
 export type MapStatePropsType = {
-    users:Array<UserType>,
-    currentPage:number,
-    pageSize:number,
-    isFetching:boolean,
-    totalUsersCount:number,
-    followingInProgress:Array<number>,
+    users: Array<UserType>,
+    currentPage: number,
+    pageSize: number,
+    isFetching: boolean,
+    totalUsersCount: number,
+    followingInProgress: Array<number>,
 }
 
 export type MapDispatchUsersToPropsType = {
@@ -43,11 +43,13 @@ export type UsersContainerPropsType = MapStatePropsType & MapDispatchUsersToProp
 export class UsersContainer extends React.Component<UsersContainerPropsType> {
 
     componentDidMount() {
-        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.getUsersThunk(currentPage, pageSize)
     }
 
     onPageChanged = (currentPage: number) => {
-        this.props.getUsersThunk(currentPage, this.props.pageSize)
+        const {pageSize} = this.props
+        this.props.getUsersThunk(currentPage, pageSize)
     }
 
     render() {
@@ -73,11 +75,11 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         // users: getUsersSuper(state),//reselect
         users: getUsers(state),
-        currentPage:getCurrentPage(state),
-        pageSize:getPageSize(state),
-        isFetching:getIsFetching(state),
-        totalUsersCount:getTotalUsersCount(state),
-        followingInProgress:getFollowingInProgress(state)
+        currentPage: getCurrentPage(state),
+        pageSize: getPageSize(state),
+        isFetching: getIsFetching(state),
+        totalUsersCount: getTotalUsersCount(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 

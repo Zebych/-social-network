@@ -81,7 +81,7 @@ test('toggle is fetching', () => {
     expect(endState.isFetching).toBe(true)
 })
 test('toggle following progress', () => {
-    const endState = usersReducer(startState, toggleFollowingProgress(true,1001))
+    const endState = usersReducer(startState, toggleFollowingProgress(true, 1001))
 
     expect(endState.followingInProgress.length).toBe(1)
 })

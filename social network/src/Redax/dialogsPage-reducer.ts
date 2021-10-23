@@ -1,6 +1,6 @@
-import { Types} from "./store";
+import {Types} from "./store";
 
-const ADD_MESSAGE = 'ADD-MESSAGE'
+const ADD_MESSAGE = 'dialogs/ADD-MESSAGE'
 
 let initialState = {
     DialogData: [
@@ -17,7 +17,7 @@ let initialState = {
     newMessage: ""
 }
 
-const dialogsPageReducer = (state:InitialStateType = initialState, action:Types): InitialStateType => {
+const dialogsPageReducer = (state: InitialStateType = initialState, action: Types): InitialStateType => {
 
     switch (action.type) {
         case ADD_MESSAGE:
@@ -35,7 +35,7 @@ const dialogsPageReducer = (state:InitialStateType = initialState, action:Types)
     }
 }
 //Actions
-export const AddMessageAC = (newMessageBody:string) => {
+export const AddMessageAC = (newMessageBody: string) => {
     return {
         type: ADD_MESSAGE,
         newMessageBody
