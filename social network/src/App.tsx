@@ -2,16 +2,18 @@ import React from 'react';
 import {BrowserRouter, Route} from "react-router-dom";
 import './App.css';
 import Navbar from "./component/Navbar/Navbar";
-import DialogsContainer from "./component/Dialogs/DialogsContainer";
-import UsersContainer from "./component/Users/UsersContainer";
-import ProfileContainer from "./component/Profile/ProfileContanier";
-import HeaderContainer from "./component/Header/HeaderContanier";
+import HeaderContainer from "./component/Header/HeaderContainer";
 import Login from "./component/Login/Login";
 import {connect, Provider} from 'react-redux';
 import {compose} from "redux";
 import {initializeApp} from "./Redax/app-reducer";
 import store, {AppStateType} from "./Redax/redux-store";
 import Preloader from "./component/commen/Preloader/Preloader";
+import {WithSuspense} from "./HOC/withSuspense";
+
+const DialogsContainer = React.lazy(() => import("./component/Dialogs/DialogsContainer"))
+const ProfileContainer = React.lazy(() => import("./component/Profile/ProfileContainer"))
+const UsersContainer = React.lazy(() => import("./component/Users/UsersContainer"))
 
 type MapDispatchPropsType = {
     initializeApp: () => void
@@ -36,10 +38,15 @@ class App extends React.Component<AppPropsType> {
                 <Navbar/>
 
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
-                    <Route path={'/profile/:userId?'} render={() => <ProfileContainer/>}/>
-                    <Route path={'/users'} render={() => <UsersContainer/>}/>
-                    <Route path={'/login'} render={() => <Login/>}/>
+                    <Route path={'/dialogs'} render={WithSuspense(DialogsContainer)}/>
+                    <Route path={'/profile/:userId?'} render={WithSuspense(ProfileContainer)}/>
+                    <Route path={'/login'} render={WithSuspense(Login)}/>
+
+                    <Route path={'/users'} render={() => {
+                        return <React.Suspense fallback={<div>Loading...</div>}>
+                            <UsersContainer/>
+                        </React.Suspense>
+                    }}/>
                 </div>
             </div>
         );
@@ -54,8 +61,8 @@ let AppContainer = compose(
     /*withRouter,*/
     connect(mapStateToProps, {initializeApp})(App));
 
-const TestApp=()=>{
-   return <BrowserRouter>
+const TestApp = () => {
+    return <BrowserRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
