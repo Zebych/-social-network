@@ -8,11 +8,13 @@ type ProfileProps = {
     profilePage: InitialStateType | null,
     getStatus: (userId: string) => void,
     updateStatus: (status: string) => void,
+    isOwner:boolean,
+    savePhoto?:any
 }
-const Profile: React.FC<ProfileProps> = ({profilePage, getStatus, updateStatus}) => {
+const Profile: React.FC<ProfileProps> = ({profilePage, getStatus, updateStatus,isOwner,savePhoto}) => {
     return (
         <div className={c.profile}>
-            <ProfileInfo profilePage={profilePage} getStatus={getStatus} updateStatus={updateStatus}/>
+            <ProfileInfo profilePage={profilePage} getStatus={getStatus} updateStatus={updateStatus} isOwner={isOwner} savePhoto={savePhoto}/>
             <MyPostsContainer/>
         </div>);
 }

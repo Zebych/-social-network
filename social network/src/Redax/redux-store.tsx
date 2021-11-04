@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import profileReducer, {addPostAC, setStatus, setUsersProfile} from "./profile-reducer";
+import profileReducer, {addPostAC, savePhotoSuccess, setStatus, setUsersProfile} from "./profile-reducer";
 import dialogsPageReducer, {AddMessageAC} from "./dialogsPage-reducer";
 import React from "react";
 import usersReducer from "./users-reducer";
@@ -27,6 +27,7 @@ export type Types =
     | ReturnType<typeof AddMessageAC>
     | ReturnType<typeof setUsersProfile>
     | ReturnType<typeof setStatus>
+    | ReturnType<typeof savePhotoSuccess>
 // @ts-ignore
 window.store = store;
 export default store;

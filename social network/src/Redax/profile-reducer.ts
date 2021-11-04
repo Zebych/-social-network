@@ -6,6 +6,7 @@ enum ActionProfileType {
     ADD_POST = 'profile/ADD-POST',
     SET_USERS_PROFILE = 'profile/SET_USERS_PROFILE',
     SET_STATUS = 'profile/SET_STATUS',
+    SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS'
 }
 
 
@@ -64,6 +65,11 @@ const profileReducer = (state: InitialStateType = initialState, action: Types): 
                 ...state,
                 status: action.status
             }
+        case ActionProfileType.SAVE_PHOTO_SUCCESS:
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photos}
+            }
         default:
             return state
 
@@ -88,6 +94,12 @@ export const setUsersProfile = (profile: ProfileStateType) => {
         profile: profile
     } as const
 }
+export const savePhotoSuccess = (photos: any) => {
+    return {
+        type: ActionProfileType.SAVE_PHOTO_SUCCESS,
+        photos
+    } as const
+}
 
 //Thunk
 export const getUsersProfile = (userId: string) => async (dispatch: Dispatch) => {
@@ -105,6 +117,12 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status))
     }
+}
+export const savePhoto = (filePhoto: any) => async (dispatch: Dispatch) => {
+        let response = await profileAPI.savePhoto(filePhoto)
+        if (response.data.resultCode === 0) {
+            dispatch(savePhotoSuccess(response.data.data.photos))
+        }
 }
 
 //Types
