@@ -33,7 +33,6 @@ export const setAuthUserData =
 //thunks
 export const getAuthUserData = () => async (dispatch: Dispatch<AuthTypeAC>) => {
     let response = await authAPI.me()
-
     if (response.data.resultCode === 0) {
         let {id, email, login} = response.data.data
         dispatch(setAuthUserData(id, email, login, true))

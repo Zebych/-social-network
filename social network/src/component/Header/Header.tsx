@@ -8,13 +8,16 @@ type HeaderPropsType={
     logout:()=>void
 }
 const Header:React.FC<HeaderPropsType> = (props) => {
+    const logOut=()=>{
+        {props.logout()}
+    }
     return (
         <div className={c.header}>
             <img
                 src={'https://st.depositphotos.com/2321413/3088/v/600/depositphotos_30889807-stock-illustration-simple-social-media-icon.jpg'}/>
             <div className={c.loginBlock}>
                 {props.isAuth
-                    ? <div>{props.login}- <button onClick={props.logout}>Log out</button></div>
+                    ? <div>{props.login} <button onClick={logOut}>Log out</button></div>
                     : <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </div>

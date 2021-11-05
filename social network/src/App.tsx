@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, HashRouter, Route} from "react-router-dom";
 import './App.css';
 import Navbar from "./component/Navbar/Navbar";
 import HeaderContainer from "./component/Header/HeaderContainer";
@@ -30,7 +30,7 @@ class App extends React.Component<AppPropsType> {
 
     render() {
         if (!this.props.initialize) {
-            return <Preloader/>
+            return <Login/>
         }
         return (
             <div className={'app-wrapper'}>
@@ -62,10 +62,10 @@ let AppContainer = compose(
     connect(mapStateToProps, {initializeApp})(App));
 
 const TestApp = () => {
-    return <BrowserRouter>
+    return <HashRouter basename={"socialNetWork"}>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
 export default TestApp;

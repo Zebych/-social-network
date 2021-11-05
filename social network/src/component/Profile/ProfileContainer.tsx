@@ -1,10 +1,18 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getStatus, getUsersProfile, InitialStateType, savePhoto, updateStatus,} from "../../Redax/profile-reducer";
+import {
+    getStatus,
+    getUsersProfile,
+    InitialStateType,
+    savePhoto,
+    saveProfile,
+    updateStatus,
+} from "../../Redax/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {AppStateType} from "../../Redax/redux-store";
 import {compose} from 'redux';
+import {FormEditModeDataType} from "./ProfileInfo/ProfileDataForm";
 
 
 type MathParamsType = {
@@ -19,6 +27,7 @@ type MapDispatchPropsType = {
     getStatus: (userId: string) => void,
     updateStatus: (status: string) => void,
     savePhoto:any,
+    saveProfile:(formData:FormEditModeDataType) => void,
 }
 type ProfileContainerPropsType = MapStatePropsType & MapDispatchPropsType
 type PropsType = RouteComponentProps<MathParamsType> & ProfileContainerPropsType
@@ -53,7 +62,7 @@ class ProfileContainer extends React.Component<PropsType> {
             <div>
                 <Profile {...this.props} profilePage={this.props.profilePage} getStatus={this.props.getStatus}
                          updateStatus={this.props.updateStatus} isOwner={!this.props.match.params.userId}
-                         savePhoto={this.props.savePhoto}/>
+                         savePhoto={this.props.savePhoto} saveProfile={this.props.saveProfile}/>
             </div>);
     }
 }
@@ -64,5 +73,5 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
 })
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUsersProfile, updateStatus, getStatus,savePhoto}),
+    connect(mapStateToProps, {getUsersProfile, updateStatus, getStatus,savePhoto,saveProfile}),
     withRouter)(ProfileContainer)

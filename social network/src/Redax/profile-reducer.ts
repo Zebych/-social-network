@@ -1,12 +1,14 @@
 import {Types} from "./redux-store";
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
+import {FormEditModeDataType} from "../component/Profile/ProfileInfo/ProfileDataForm";
 
 enum ActionProfileType {
     ADD_POST = 'profile/ADD-POST',
     SET_USERS_PROFILE = 'profile/SET_USERS_PROFILE',
     SET_STATUS = 'profile/SET_STATUS',
-    SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS'
+    SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS',
+    SAVE_PROFILE_SUCCESS='SAVE_PROFILE_SUCCESS',
 }
 
 
@@ -29,7 +31,7 @@ let initialState = {
                 website: '',
                 youtube: '',
             },
-        fullName: "Any",
+        fullName: "Alex",
         lookingForAJob: false,
         lookingForAJobDescription: '',
         photos:
@@ -70,6 +72,11 @@ const profileReducer = (state: InitialStateType = initialState, action: Types): 
                 ...state,
                 profile: {...state.profile, photos: action.photos}
             }
+            case ActionProfileType.SAVE_PROFILE_SUCCESS:
+            return {
+                ...state,
+                profile: {...state.profile}
+            }
         default:
             return state
 
@@ -100,6 +107,12 @@ export const savePhotoSuccess = (photos: any) => {
         photos
     } as const
 }
+export const saveProfileSuccess = (profile: any) => {
+    return {
+        type: ActionProfileType.SAVE_PROFILE_SUCCESS,
+        profile
+    } as const
+}
 
 //Thunk
 export const getUsersProfile = (userId: string) => async (dispatch: Dispatch) => {
@@ -122,6 +135,12 @@ export const savePhoto = (filePhoto: any) => async (dispatch: Dispatch) => {
         let response = await profileAPI.savePhoto(filePhoto)
         if (response.data.resultCode === 0) {
             dispatch(savePhotoSuccess(response.data.data.photos))
+        }
+}
+export const saveProfile = (formData:FormEditModeDataType) => async (dispatch: Dispatch) => {
+        let response = await profileAPI.saveProfile(formData)
+        if (response.data.resultCode === 0) {
+            dispatch(saveProfileSuccess(response.data))
         }
 }
 

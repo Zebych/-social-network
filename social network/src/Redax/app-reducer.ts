@@ -29,7 +29,10 @@ export const initializeApp = () => (dispatch: Dispatch<any>) => {
     let promise = dispatch(getAuthUserData())
     Promise.all([promise]).then(() => {
         dispatch(initializedSuccess())
-    })
+    }).catch(
+        ()=>{
+            console.log('err initializeApp')}
+    )
 }
 //Types
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from './Login.module.css'
 import {InjectedFormProps, reduxForm} from 'redux-form';
 import {createField} from "../commen/FormControls/FormControls";
@@ -13,7 +13,9 @@ type FormDataType = {
     password: string,
     rememberMe: boolean,
 }
+
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
+
     return (
         <form onSubmit={handleSubmit}>
             {createField("email", [required],  "Email",)}
@@ -32,6 +34,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, err
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
 const Login = (props: any) => {
+
     const onSubmit = (formData: FormDataType) => {
         props.LoginTC(formData.email, formData.password, formData.rememberMe)
     }
@@ -40,7 +43,7 @@ const Login = (props: any) => {
     }
     return (<div>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm  onSubmit={onSubmit}/>
         </div>
     );
 };

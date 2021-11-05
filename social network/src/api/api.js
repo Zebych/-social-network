@@ -1,4 +1,5 @@
 import axios from "axios";
+import {FormEditModeDataType} from "../component/Profile/ProfileInfo/ProfileDataForm";
 
 const instance = axios.create({
     withCredentials: true,
@@ -32,7 +33,6 @@ export const profileAPI = {
     },
     //Отправить фото на сервак
     savePhoto(filePhoto) {
-        debugger
         const formData = new FormData()
         formData.append('image',filePhoto)
         return instance.put(`/profile/photo/`, formData, {
@@ -41,6 +41,10 @@ export const profileAPI = {
             }
         })
     },
+    //Отправить отредактированные данные профиля
+    saveProfile(profile){
+        return instance.put(`/profile`, profile)
+    }
 }
 
 export const authAPI = {

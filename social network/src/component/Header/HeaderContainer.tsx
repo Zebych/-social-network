@@ -3,6 +3,7 @@ import Header from './Header';
 import {connect} from "react-redux";
 import {InitialAuthStateType, Logout, setAuthUserData} from "../../Redax/auth-reducer";
 import {AppStateType} from "../../Redax/redux-store";
+import {debuglog} from "util";
 
 
 type MapStateToPropsType = {
@@ -12,6 +13,7 @@ type MapStateToPropsType = {
 }
 type MapDispatchToPropsType = {
     setAuthUserData: (id: null | number, email: null | string, login: null | string, isAuth: boolean) => void,
+    Logout:()=>void
     // getAuthUserData: () => void
 }
 
