@@ -1,0 +1,41 @@
+.input {
+    padding: 10px;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    margin-top: 10px;
+    outline: none;
+}
+
+.button {
+    padding: 10px 40px;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.form {
+    padding: 10px;
+}
+
+.errorMessage {
+    color: red;
+}
+
+.inputError {
+    border: 1px solid red;
+}
+
+.captcha {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+}
+
+.captcha input {
+    margin-top: 2px;
+}
+
+.captcha button {
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,71 +1,83 @@
 import React from 'react';
-import {BrowserRouter, HashRouter, Route} from "react-router-dom";
+import {connect} from 'react-redux';
+import {Redirect, Route, Switch} from 'react-router-dom';
 import './App.css';
-import Navbar from "./component/Navbar/Navbar";
-import HeaderContainer from "./component/Header/HeaderContainer";
-import Login from "./component/Login/Login";
-import {connect, Provider} from 'react-redux';
-import {compose} from "redux";
-import {initializeApp} from "./Redax/app-reducer";
-import store, {AppStateType} from "./Redax/redux-store";
-import Preloader from "./component/commen/Preloader/Preloader";
-import {WithSuspense} from "./HOC/withSuspense";
+import {Preloader} from './components/common/Preloader/Preloader';
+import HeaderContainer from './components/Header/HeaderContainer';
+import {Login} from './components/Login/Login';
+import Music from "./components/Music/Music";
+import NavBar from "./components/NavBar/NavBar";
+import News from "./components/News/News";
+import Settings from "./components/Settings/Settings";
+import {initializeApp} from './redux/appReducer';
+import {AppStoreType} from './redux/reduxStore';
+import {ReactSuspense} from "./hoc/ReactSuspense";
+import {Error} from "./components/ErrorPage/ErrorPage";
 
-const DialogsContainer = React.lazy(() => import("./component/Dialogs/DialogsContainer"))
-const ProfileContainer = React.lazy(() => import("./component/Profile/ProfileContainer"))
-const UsersContainer = React.lazy(() => import("./component/Users/UsersContainer"))
+const Dialogs = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+const UsersApiComponent = React.lazy(() => import('./components/Users/UsersContainer'));
 
-type MapDispatchPropsType = {
-    initializeApp: () => void
-}
-type MapStatePropsType = {
+
+type MapStateToPropsType = {
     initialize: boolean
 }
-type AppPropsType = MapDispatchPropsType & MapStatePropsType
+type MapDispatchToPropsType = {
+    initializeApp: () => void
+}
 
-class App extends React.Component<AppPropsType> {
+
+class App extends React.Component<MapStateToPropsType & MapDispatchToPropsType> {
+
     componentDidMount() {
         this.props.initializeApp()
     }
 
     render() {
         if (!this.props.initialize) {
-            return <Login/>
+            return <Preloader/>
         }
         return (
+
             <div className={'app-wrapper'}>
                 <HeaderContainer/>
-                <Navbar/>
-
+                <NavBar/>
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/dialogs'} render={WithSuspense(DialogsContainer)}/>
-                    <Route path={'/profile/:userId?'} render={WithSuspense(ProfileContainer)}/>
-                    <Route path={'/login'} render={WithSuspense(Login)}/>
+                    <Switch>
 
-                    <Route path={'/users'} render={() => {
-                        return <React.Suspense fallback={<div>Loading...</div>}>
-                            <UsersContainer/>
-                        </React.Suspense>
-                    }}/>
+                        <Route path={"/profile/:userId?"}
+                               render={ReactSuspense(ProfileContainer)}/>
+                        <Route exact path={"/"}
+                               render={() => <Redirect from={'/'} to={'/profile'}/>}/>
+                        <Route path={"/dialogs"}
+                               render={ReactSuspense(Dialogs)}/>
+
+                        <Route path={"/news"} render={() => <News/>}/>
+                        <Route path={"/music"} render={() => <Music/>}/>
+                        <Route path={"/settings"} render={() => <Settings/>}/>
+
+                        <Route path={"/users"}
+                               render={ReactSuspense(UsersApiComponent)}/>
+
+                        <Route path={"/login"} render={() => <Login/>}/>
+                        <Route path={'/404'} render={() => <Error/>}/>
+                        <Redirect from={'*'} to={'/404'}/>
+
+
+                    </Switch>
                 </div>
+
+
             </div>
+
         );
     }
+
 }
 
-const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
-    initialize: state.app.initialized
-})
-
-let AppContainer = compose(
-    /*withRouter,*/
-    connect(mapStateToProps, {initializeApp})(App));
-
-const TestApp = () => {
-    return <HashRouter basename={"socialNetWork"}>
-        <Provider store={store}>
-            <AppContainer/>
-        </Provider>
-    </HashRouter>
+const mapStateToProps = (state: AppStoreType): MapStateToPropsType => {
+    return {
+        initialize: state.app.initialized
+    }
 }
-export default TestApp;
+export default connect(mapStateToProps, {initializeApp})(App)
