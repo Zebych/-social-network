@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/component/Users/User.module.css"],"names":[],"mappings":"AAAA,uBACI,YAAa,CACb,WACJ","file":"5.84a320b1.chunk.css","sourcesContent":[".userPhoto {\r\n    height: 100px;\r\n    width: 100px;\r\n}\r\n"]}
